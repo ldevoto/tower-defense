@@ -53,7 +53,7 @@ namespace TowerDefense.SO
             _action2Value = false;
         }
 
-        public void ResetControls()
+        public virtual void ResetControls()
         {
             Camera = Camera.main;
             ClearValues();

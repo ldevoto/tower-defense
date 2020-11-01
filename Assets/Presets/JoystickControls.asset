@@ -16,5 +16,5 @@ MonoBehaviour:
   action2: Fire2
   horizontalAxis: Horizontal
   verticalAxis: Vertical
-  horizontalRotationAxis: HorizontalRotation
-  verticalRotationAxis: VerticalRotation
+  rotationAxis: Rotation
+  rotationSpeed: 200

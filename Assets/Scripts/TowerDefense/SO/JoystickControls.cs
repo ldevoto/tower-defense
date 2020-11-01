@@ -5,10 +5,10 @@ namespace TowerDefense.SO
     [CreateAssetMenu(fileName = "JoystickControls", menuName = "SO/Joystick Controls", order = 2)]
     public class JoystickControls : Controls
     {
-        [SerializeField] private string horizontalRotationAxis = "HorizontalRotation";
-        [SerializeField] private string verticalRotationAxis = "VerticalRotation";
+        [SerializeField] private string rotationAxis = "Rotation";
+        [SerializeField] private float rotationSpeed = 50f;
         
-        private Vector3 _rotationPosition = Vector3.zero;
+        private float _rotationValue = 0f;
 
         public override bool IsJoystick()
         {
@@ -17,19 +17,19 @@ namespace TowerDefense.SO
 
         public override float GetRotation(Transform target)
         {
-            return CalculateRotationAngle();
+            return _rotationValue;
         }
 
         public override void Update()
         {
             base.Update();
-            _rotationPosition = new Vector3(Input.GetAxis(horizontalRotationAxis), Input.GetAxis(verticalRotationAxis), 0f);
+            _rotationValue += Input.GetAxis(rotationAxis) * Time.deltaTime * rotationSpeed;
         }
 
-        private float CalculateRotationAngle()
+        public override void ResetControls()
         {
-            _rotationPosition = new Vector3(Input.GetAxis(horizontalRotationAxis), Input.GetAxis(verticalRotationAxis), 0f);
-            return Vector3.SignedAngle(Vector3.right, _rotationPosition - Vector3.zero, Vector3.forward);
+            base.ResetControls();
+            _rotationValue = 0f;
         }
     }
 }

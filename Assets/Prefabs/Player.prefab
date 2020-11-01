@@ -182,7 +182,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &7786223659604977299
@@ -274,6 +274,10 @@ PrefabInstance:
       propertyPath: aliveEntityController
       value: 
       objectReference: {fileID: 7786223659604977299}
+    - target: {fileID: 1233051623115099251, guid: f6f7b270f281b714caef78c31a9ea3cd, type: 3}
+      propertyPath: transitionTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1233051623115099278, guid: f6f7b270f281b714caef78c31a9ea3cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

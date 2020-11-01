@@ -13,17 +13,13 @@ namespace TowerDefense.Controllers
         [SerializeField] private Rigidbody2D towerRigidbody = null;
         [SerializeField] private float shotCooldown = 1f;
 
-        private void Awake()
-        {
-            watcherController.OnTargetEnter += OnTargetEnter;
-            watcherController.OnTargetLeave += OnTargetLeave;
-        }
-        
         private void Start()
         {
-            //watcherController.SetSize(5f);
-            //watcherController.ShowGizmo();
             aliveEntityController.SetHP(100f);
+            aliveEntityController.OnKill += Kill;
+            watcherController.OnTargetEnter += OnTargetEnter;
+            watcherController.OnTargetLeave += OnTargetLeave;
+            watcherController.ShowGizmo();
         }
 
         private void OnTargetLeave(GameObject obj)
@@ -50,13 +46,19 @@ namespace TowerDefense.Controllers
         {
             while (true)
             {
+                if (!target) continue;
+                
                 var direction = target.transform.position - towerRigidbody.transform.position;
                 direction.z = 0;
                 var rotation = Vector2.SignedAngle(Vector2.right, direction);
-                //towerRigidbody.MoveRotation(rotation);
                 towerRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
                 yield return null;
             }
+        }
+
+        private void Kill()
+        {
+            Destroy(gameObject);
         }
     }
 }
