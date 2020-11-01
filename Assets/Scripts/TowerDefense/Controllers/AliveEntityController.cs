@@ -13,24 +13,6 @@ namespace TowerDefense.Controllers
         private float _currentHp = 0f;
         private bool _isKilled = false;
 
-        private void Start()
-        {
-            SetHP(100f);
-        }
-
-        private void Update()
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Damage(10f);
-            }
-
-            if (Input.GetButtonDown("Fire2"))
-            {
-                Heal(5f);
-            }
-        }
-
         public void SetHP(float amount)
         {
             _maxHp = amount;

@@ -12,12 +12,12 @@ namespace TowerDefense.SO
 
         public override float GetRotation(Transform target)
         {
-            return CalculateRotationAngle(target);
+            return CalculateRotationAngle(target) - 90f;
         }
 
         private float CalculateRotationAngle(Transform target)
         {
-            var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            var mousePosition = Camera.ScreenToWorldPoint(Input.mousePosition);
             var targetPosition = target.position;
             mousePosition.z = targetPosition.z;
             return Vector3.SignedAngle(Vector3.right, mousePosition - targetPosition, Vector3.forward);

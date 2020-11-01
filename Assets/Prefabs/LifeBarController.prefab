@@ -174,8 +174,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1233051623115099278}
   - component: {fileID: 1233051623115099249}
-  - component: {fileID: 1233051623115099251}
   - component: {fileID: 1233051623115099248}
+  - component: {fileID: 1233051623115099251}
+  - component: {fileID: 2322866388448485879}
   m_Layer: 0
   m_Name: LifeBarController
   m_TagString: Untagged
@@ -211,21 +212,6 @@ SortingGroup:
   m_SortingLayerID: 1031554753
   m_SortingLayer: 1
   m_SortingOrder: 0
---- !u!114 &1233051623115099251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233051623115099279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d39b29bbbb4f2181e3ae0173aa14d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aliveEntityController: {fileID: 0}
-  animator: {fileID: 1233051623115099248}
-  transitionTime: 0.5
 --- !u!95 &1233051623115099248
 Animator:
   serializedVersion: 3
@@ -245,6 +231,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1233051623115099251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233051623115099279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d39b29bbbb4f2181e3ae0173aa14d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliveEntityController: {fileID: 0}
+  animator: {fileID: 1233051623115099248}
+  transitionTime: 0.5
+--- !u!114 &2322866388448485879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233051623115099279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a0ad2271e24e7a82f492912d5a10c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &1233051624092780265
 GameObject:
   m_ObjectHideFlags: 0

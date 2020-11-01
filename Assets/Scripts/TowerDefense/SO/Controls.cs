@@ -12,7 +12,7 @@ namespace TowerDefense.SO
         private Vector3 _movement = Vector3.zero;
         private bool _action1Value = false;
         private bool _action2Value = false;
-        protected Camera _camera;
+        protected Camera Camera;
 
         public abstract bool IsJoystick();
         
@@ -37,14 +37,8 @@ namespace TowerDefense.SO
         {
             //Debug.LogFormat("x: {0}, y: {1}, clamp: {2}", Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), GetClampedMovement() * Time.deltaTime);
             _movement += GetClampedMovement() * Time.deltaTime;
-            if (!_action1Value)
-            {
-                _action1Value = Input.GetButtonDown(action1);
-            }
-            if (!_action2Value)
-            {
-                _action2Value = Input.GetButtonDown(action2);
-            }
+            _action1Value = Input.GetButton(action1);
+            _action2Value = Input.GetButton(action2);
         }
 
         private Vector3 GetClampedMovement()
@@ -61,7 +55,7 @@ namespace TowerDefense.SO
 
         public void ResetControls()
         {
-            _camera = Camera.main;
+            Camera = Camera.main;
             ClearValues();
         }
     }

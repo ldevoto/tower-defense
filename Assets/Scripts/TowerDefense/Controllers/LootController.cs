@@ -25,7 +25,7 @@ namespace TowerDefense.Controllers
         {
             if (!other.gameObject.CompareTag("Player")) return;
             
-            other.gameObject.GetComponent<PlayerController>().PickUp(loot);
+            other.gameObject.GetComponentInParent<PlayerController>().PickUp(loot);
             Pickup();
             _collider2D.enabled = false;
             //Destroy(gameObject);
