@@ -6,7 +6,7 @@ namespace TowerDefense.Controllers
 {
     public class ShotController : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D rigidbody2D = null;
+        [SerializeField] private Rigidbody2D shotRigidbody = null;
         [SerializeField] private float impulse = 5f;
         [SerializeField] private float damage = 5;
         [SerializeField] private string[] targets = null;
@@ -15,7 +15,7 @@ namespace TowerDefense.Controllers
         private int _damagedTargets = 0;
         private void Start()
         {
-            rigidbody2D.AddRelativeForce(Vector2.up * impulse, ForceMode2D.Impulse);
+            shotRigidbody.AddRelativeForce(Vector2.right * impulse, ForceMode2D.Impulse);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

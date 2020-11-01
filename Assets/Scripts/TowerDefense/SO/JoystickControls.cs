@@ -17,7 +17,7 @@ namespace TowerDefense.SO
 
         public override float GetRotation(Transform target)
         {
-            return CalculateRotationAngle() - 90f;
+            return CalculateRotationAngle();
         }
 
         public override void Update()
