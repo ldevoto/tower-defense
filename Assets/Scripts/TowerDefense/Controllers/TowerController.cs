@@ -18,6 +18,13 @@ namespace TowerDefense.Controllers
             watcherController.OnTargetEnter += OnTargetEnter;
             watcherController.OnTargetLeave += OnTargetLeave;
         }
+        
+        private void Start()
+        {
+            //watcherController.SetSize(5f);
+            //watcherController.ShowGizmo();
+            aliveEntityController.SetHP(100f);
+        }
 
         private void OnTargetLeave(GameObject obj)
         {
@@ -50,13 +57,6 @@ namespace TowerDefense.Controllers
                 towerRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
                 yield return null;
             }
-        }
-
-        private void Start()
-        {
-            watcherController.SetSize(4f);
-            watcherController.ShowGizmo();
-            aliveEntityController.SetHP(100f);
         }
     }
 }

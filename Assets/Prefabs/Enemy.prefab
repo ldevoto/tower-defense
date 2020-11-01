@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooterController: {fileID: 2999740198115972534}
   aliveEntityController: {fileID: 2999740198115972535}
-  playerRigidbody: {fileID: 2999740198115972532}
+  enemyRigidbody: {fileID: 2999740198115972532}
   speed: 2
 --- !u!1 &2999740199691951239
 GameObject:
