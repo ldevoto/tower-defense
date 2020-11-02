@@ -16,6 +16,7 @@ namespace TowerDefense.Controllers
         private void Start()
         {
             aliveEntityController.OnHpChange += UpdateLifeBar;
+            UpdateLifeBar();
         }
 
         private void UpdateLifeBar()
