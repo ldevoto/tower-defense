@@ -15,7 +15,7 @@ namespace TowerDefense.Controllers
 
         private void Start()
         {
-            aliveEntityController.SetHP(1000f);
+            aliveEntityController.SetHP(200f);
             aliveEntityController.OnKill += Kill;
             watcherController.ShowGizmo();
             watcherController.OnTargetEnter += OnTargetEnter;
@@ -37,6 +37,8 @@ namespace TowerDefense.Controllers
         {
             while (true)
             {
+                if (!target) break;
+                
                 shooterController.Shot();
                 yield return new WaitForSeconds(shotCooldown);
             }
@@ -46,7 +48,7 @@ namespace TowerDefense.Controllers
         {
             while (true)
             {
-                if (!target) continue;
+                if (!target) break;
                 
                 var direction = target.transform.position - enemyRigidbody.transform.position;
                 direction.z = 0;

@@ -13,10 +13,9 @@ namespace TowerDefense.Controllers
         private Coroutine _barUpdateCoroutine = null;
         private static readonly int Percentage = Animator.StringToHash("Percentage");
 
-        private void Awake()
+        private void Start()
         {
             aliveEntityController.OnHpChange += UpdateLifeBar;
-            aliveEntityController.OnKill += UpdateLifeBar;
         }
 
         private void UpdateLifeBar()

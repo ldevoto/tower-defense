@@ -37,6 +37,8 @@ namespace TowerDefense.Controllers
         {
             while (true)
             {
+                if (!target) break;
+                
                 shooterController.Shot();
                 yield return new WaitForSeconds(shotCooldown);
             }
@@ -46,7 +48,7 @@ namespace TowerDefense.Controllers
         {
             while (true)
             {
-                if (!target) continue;
+                if (!target) break;
                 
                 var direction = target.transform.position - towerRigidbody.transform.position;
                 direction.z = 0;

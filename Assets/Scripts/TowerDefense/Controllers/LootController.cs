@@ -1,5 +1,4 @@
-﻿using System;
-using TowerDefense.SO;
+﻿using TowerDefense.SO;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -28,7 +27,8 @@ namespace TowerDefense.Controllers
             other.gameObject.GetComponentInParent<PlayerController>().PickUp(loot);
             Pickup();
             _collider2D.enabled = false;
-            //Destroy(gameObject);
+            Debug.LogWarning("No se destruyó");
+            // TODO: Destroy(gameObject);
         }
     }
 }

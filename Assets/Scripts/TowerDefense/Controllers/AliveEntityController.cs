@@ -5,7 +5,6 @@ namespace TowerDefense.Controllers
 {
     public class AliveEntityController : MonoBehaviour
     {
-        [SerializeField] private bool allowMultipleKills = false;
         public Action OnHpChange = null;
         public Action OnKill = null;
         
@@ -52,7 +51,7 @@ namespace TowerDefense.Controllers
         private void Kill()
         {
             _currentHp = 0f;
-            if (!allowMultipleKills && _isKilled) return;
+            if (_isKilled) return;
             
             _isKilled = true;
             OnKill?.Invoke();

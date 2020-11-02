@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TowerDefense.Controllers
 {
@@ -8,17 +7,9 @@ namespace TowerDefense.Controllers
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private GameObject lootPrefab = null;
 
-        private void OnEnable()
+        private void Start()
         {
             aliveEntityController.OnKill += DropLoot;
-        }
-
-        private void OnDisable()
-        {
-            if (aliveEntityController.OnKill != null)
-            {
-                aliveEntityController.OnKill -= DropLoot;
-            }
         }
 
         private void DropLoot()
