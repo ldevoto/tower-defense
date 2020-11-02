@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -7,50 +6,50 @@ namespace TowerDefense.Controllers
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private WatcherController watcherController = null;
-        [SerializeField] private ShooterController shooterController = null;
+        [SerializeField] private DamageDealerController damageDealerController = null;
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private Rigidbody2D enemyRigidbody = null;
         [SerializeField] private float speed = 1f;
-        [SerializeField] private float shotCooldown = 0.5f;
+        [SerializeField] private float damageCooldown = 0.5f;
 
         private void Start()
         {
             aliveEntityController.SetHP(200f);
             aliveEntityController.OnKill += Kill;
             watcherController.ShowGizmo();
-            watcherController.OnTargetEnter += OnTargetEnter;
-            watcherController.OnTargetLeave += OnTargetLeave;
+            watcherController.OnAliveEntityEnter += OnTargetEnter;
+            watcherController.OnAliveEntityLeave += OnTargetLeave;
         }
         
-        private void OnTargetEnter(GameObject target)
+        private void OnTargetEnter(AliveEntityController aliveEntity)
         {
-            StartCoroutine(FollowEnemy(target));
-            StartCoroutine(ShotEnemy(target));
+            StartCoroutine(FollowEnemy(aliveEntity));
+            StartCoroutine(DamageEntity(aliveEntity));
         }
         
-        private void OnTargetLeave(GameObject obj)
+        private void OnTargetLeave(AliveEntityController aliveEntity)
         {
             StopAllCoroutines();
         }
 
-        private IEnumerator ShotEnemy(GameObject target)
+        private IEnumerator DamageEntity(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!target) break;
+                if (!aliveEntity) break;
                 
-                shooterController.Shot();
-                yield return new WaitForSeconds(shotCooldown);
+                damageDealerController.Damage(aliveEntity);
+                yield return new WaitForSeconds(damageCooldown);
             }
         }
 
-        private IEnumerator FollowEnemy(GameObject target)
+        private IEnumerator FollowEnemy(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!target) break;
+                if (!aliveEntity) break;
                 
-                var direction = target.transform.position - enemyRigidbody.transform.position;
+                var direction = aliveEntity.transform.position - enemyRigidbody.transform.position;
                 direction.z = 0;
                 var rotation = Vector2.SignedAngle(Vector2.right, direction);
                 enemyRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);

@@ -10,12 +10,15 @@ namespace TowerDefense.Controllers
         [SerializeField] private string[] targets = null;
         public Action<GameObject> OnTargetEnter = null;
         public Action<GameObject> OnTargetLeave = null;
+        public Action<AliveEntityController> OnAliveEntityEnter = null;
+        public Action<AliveEntityController> OnAliveEntityLeave = null;
 
         private SpriteRenderer _spriteRenderer = null;
 
         private Color _hideColor = Color.white;
         private Color _showColor = Color.white;
         private GameObject _target = null;
+        private AliveEntityController _aliveEntity = null;
 
         private void Awake()
         {
@@ -49,9 +52,16 @@ namespace TowerDefense.Controllers
         {
             if (_target) return;
             if (!targets.Any(t => other.gameObject.CompareTag(t))) return;
+
+            var otherGameObject = other.gameObject;
+            _target = otherGameObject;
+            OnTargetEnter?.Invoke(otherGameObject);
             
-            _target = other.gameObject;
-            OnTargetEnter?.Invoke(other.gameObject);
+            var aliveEntity = otherGameObject.GetComponent<AliveEntityController>();
+            if (!aliveEntity) return;
+            
+            _aliveEntity = aliveEntity;
+            OnAliveEntityEnter?.Invoke(aliveEntity);
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -59,7 +69,14 @@ namespace TowerDefense.Controllers
             if (_target != other.gameObject) return;
 
             _target = null;
-            OnTargetLeave?.Invoke(other.gameObject);
+            var otherGameObject = other.gameObject;
+            OnTargetLeave?.Invoke(otherGameObject);
+            
+            var aliveEntity = otherGameObject.GetComponent<AliveEntityController>();
+            if (!aliveEntity) return;
+            
+            _aliveEntity = null;
+            OnAliveEntityLeave?.Invoke(aliveEntity);
         }
     }
 }
