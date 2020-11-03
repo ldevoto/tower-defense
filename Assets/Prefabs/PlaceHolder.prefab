@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8618f469fc554f75bb2ed0204cbecda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ringRenderer: {fileID: 7535887778438544765}
   blockerTags:
   - Position
   - Enemy
@@ -275,6 +276,8 @@ MonoBehaviour:
   - {fileID: 2885038298396140888}
   - {fileID: 875040269417007189}
   - {fileID: 8754588116488351495}
+  allowedColor: {r: 0.2807715, g: 1, b: 0, a: 1}
+  notAllowedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7535887778438544739
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +350,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 303b858d585f78e449270a01d6a4e72d, type: 3}
-  m_Color: {r: 0.9775805, g: 1, b: 0.5235849, a: 0.5529412}
+  m_Color: {r: 0.9775805, g: 1, b: 0.5235849, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

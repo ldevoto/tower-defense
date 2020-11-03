@@ -13,7 +13,7 @@ namespace TowerDefense.Controllers
 
         private void Start()
         {
-            aliveEntityController.SetHP(100f);
+            aliveEntityController.SetHP(1000f);
             aliveEntityController.OnKill += Kill;
             watcherController.OnTargetEnter += OnTargetEnter;
             watcherController.OnTargetLeave += OnTargetLeave;

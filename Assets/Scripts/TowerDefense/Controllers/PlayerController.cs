@@ -32,6 +32,11 @@ namespace TowerDefense.Controllers
             OnPickupLoot?.Invoke(loot);
         }
 
+        public Transform GetPlayerTransform()
+        {
+            return aliveEntityController.gameObject.transform;
+        }
+
         private void Update()
         {
             controls.Update();

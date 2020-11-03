@@ -7,9 +7,12 @@ namespace TowerDefense.Controllers
     [RequireComponent(typeof(Collider2D))]
     public class PlaceHolderController : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer ringRenderer = null;
         [SerializeField] private string[] blockerTags = null;
         [SerializeField] private PlaceableController[] placeablePrefabs = null;
         [SerializeField] private GameObject[] models = null;
+        [SerializeField] private Color allowedColor = Color.white;
+        [SerializeField] private Color notAllowedColor = Color.white;
         
         private readonly List<GameObject> _collisions = new List<GameObject>();
         private int _currentPlaceable = 0;
@@ -20,8 +23,8 @@ namespace TowerDefense.Controllers
             {
                 model.SetActive(false);
             }
-
             SetCurrentPlaceable(0);
+            ringRenderer.color = allowedColor;
         }
 
         public void Next()
@@ -43,7 +46,7 @@ namespace TowerDefense.Controllers
             }
             SetCurrentPlaceable(newPlaceable);
         }
-        
+
         private void SetCurrentPlaceable(int i)
         {
             models[_currentPlaceable].SetActive(false);
@@ -66,6 +69,7 @@ namespace TowerDefense.Controllers
             if (blockerTags.Any(blockerTag => other.gameObject.CompareTag(blockerTag)))
             {
                 _collisions.Add(other.gameObject);
+                ringRenderer.color = notAllowedColor;
             }
         }
 
@@ -74,6 +78,10 @@ namespace TowerDefense.Controllers
             if (blockerTags.Any(blockerTag => other.gameObject.CompareTag(blockerTag)))
             {
                 _collisions.Remove(other.gameObject);
+                if (_collisions.Count == 0)
+                {
+                    ringRenderer.color = allowedColor;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Pathfinding;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -11,6 +12,38 @@ namespace TowerDefense.Controllers
         [SerializeField] private Rigidbody2D enemyRigidbody = null;
         [SerializeField] private float speed = 1f;
         [SerializeField] private float damageCooldown = 0.5f;
+        
+        /// <summary>The object that the AI should move to</summary>
+        public Transform target;
+        private Transform temporalTarget;
+        IAstarAI ai;
+
+        void OnEnable () {
+            ai = GetComponentInChildren<IAstarAI>();
+            // Update the destination right before searching for a path as well.
+            // This is enough in theory, but this script will also update the destination every
+            // frame as the destination is used for debugging and may be used for other things by other
+            // scripts as well. So it makes sense that it is up to date every frame.
+            if (ai != null) ai.onSearchPath += Update;
+        }
+
+        void OnDisable () {
+            if (ai != null) ai.onSearchPath -= Update;
+        }
+
+        /// <summary>Updates the AI's destination every frame</summary>
+        void Update () {
+            if (temporalTarget)
+            {
+                if (target && ai != null) ai.destination = temporalTarget.position;
+            }
+            else
+            {
+                if (target && ai != null) ai.destination = target.position;
+            }
+        }
+        
+        
 
         private void Start()
         {
@@ -22,12 +55,14 @@ namespace TowerDefense.Controllers
         
         private void OnTargetEnter(AliveEntityController aliveEntity)
         {
-            StartCoroutine(FollowEnemy(aliveEntity));
+            temporalTarget = aliveEntity.transform;
+            //StartCoroutine(FollowEnemy(aliveEntity));
             StartCoroutine(DamageEntity(aliveEntity));
         }
         
         private void OnTargetLeave(AliveEntityController aliveEntity)
         {
+            temporalTarget = null;
             StopAllCoroutines();
         }
 
@@ -59,11 +94,6 @@ namespace TowerDefense.Controllers
         private void Kill()
         {
             Destroy(gameObject);
-        }
-
-        private void FixedUpdate()
-        {
-            enemyRigidbody.MovePosition(enemyRigidbody.position + Vector2.right * (Time.fixedDeltaTime * speed));
         }
     }
 }

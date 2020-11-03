@@ -9,7 +9,7 @@ namespace TowerDefense.Controllers
 
         private void Start()
         {
-            aliveEntityController.SetHP(100f);
+            aliveEntityController.SetHP(2000f);
             aliveEntityController.OnKill += Kill;
         }
 
