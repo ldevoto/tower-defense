@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using TowerDefense.SO;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -19,7 +17,6 @@ namespace TowerDefense.Controllers
             aliveEntityController.OnKill += Kill;
             watcherController.OnTargetEnter += OnTargetEnter;
             watcherController.OnTargetLeave += OnTargetLeave;
-            watcherController.ShowGizmo();
         }
 
         private void OnTargetLeave(GameObject obj)

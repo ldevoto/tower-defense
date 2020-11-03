@@ -16,7 +16,6 @@ namespace TowerDefense.Controllers
         {
             aliveEntityController.SetHP(200f);
             aliveEntityController.OnKill += Kill;
-            watcherController.ShowGizmo();
             watcherController.OnAliveEntityEnter += OnTargetEnter;
             watcherController.OnAliveEntityLeave += OnTargetLeave;
         }
@@ -38,7 +37,7 @@ namespace TowerDefense.Controllers
             {
                 if (!aliveEntity) break;
                 
-                damageDealerController.Damage(aliveEntity);
+                aliveEntity.Damage(10f);
                 yield return new WaitForSeconds(damageCooldown);
             }
         }

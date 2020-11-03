@@ -25,7 +25,7 @@ namespace TowerDefense.Controllers
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _showColor = _spriteRenderer.color;
             _hideColor = new Color(1f, 1f, 1f, 0f);
-            HideGizmo();
+            //HideGizmo();
         }
 
         public GameObject GetTarget()

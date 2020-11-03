@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   action1: Fire1
   action2: Fire2
+  action3: Fire3
+  nextButton: NextButton
+  previousButton: PreviousButton
   horizontalAxis: Horizontal
   verticalAxis: Vertical
