@@ -1,11 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace TowerDefense.Controllers.AI
 {
     public class GraphController : MonoBehaviour
     {
-        private void UpdateGraph(Vector3 updatePoint)
+        public void UpdateGraph(Vector3 updatePoint)
         {
+            AstarPath.active.Scan();
+        }
+        
+        public void UpdateCompleteGraph()
+        {
+            StartCoroutine(UpdateGraphCoroutine());
+        }
+
+        private IEnumerator UpdateGraphCoroutine()
+        {
+            yield return null;
             AstarPath.active.Scan();
         }
     }

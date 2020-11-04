@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Position
   - PlaceHolder
+  - Relic
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@ namespace TowerDefense.Controllers
         [SerializeField] private Rigidbody2D playerRigidbody = null;
         [SerializeField] private float speed = 1f;
         public Action<LootSO> OnPickupLoot = null;
+        public Action OnTowerPlaced = null;
+        public Action OnTowerRemoved = null;
 
         private bool _constructionMode = false;
 
@@ -57,7 +59,11 @@ namespace TowerDefense.Controllers
                 }
                 if (controls.GetAction1())
                 {
-                    placeHolderController.Place();
+                    if (placeHolderController.Place(out var wallController))
+                    {
+                        wallController.OnKill += OnTowerRemoved;
+                        OnTowerPlaced?.Invoke();
+                    }
                 }
             }
             else

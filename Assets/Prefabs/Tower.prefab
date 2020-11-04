@@ -421,9 +421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0c1ed99d4f42128d11e350b6dce31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aliveEntityController: {fileID: 6240284307484783936}
+  objectsToRotate:
+  - {fileID: 6240284307484783940}
+  - {fileID: 512505268197039060}
   watcherController: {fileID: 6214904577870624977}
   shooterController: {fileID: 6240284307484783967}
-  aliveEntityController: {fileID: 6240284307484783936}
   towerRigidbody: {fileID: 6240284307484783938}
   shotCooldown: 1
 --- !u!114 &1362909219250200170

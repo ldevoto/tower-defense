@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Pathfinding;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private Rigidbody2D enemyRigidbody = null;
         [SerializeField] private float speed = 1f;
         [SerializeField] private float damageCooldown = 0.5f;
+        public Action OnKill = null;
         
         /// <summary>The object that the AI should move to</summary>
         public Transform target;
@@ -93,6 +95,7 @@ namespace TowerDefense.Controllers
 
         private void Kill()
         {
+            OnKill?.Invoke();
             Destroy(gameObject);
         }
     }

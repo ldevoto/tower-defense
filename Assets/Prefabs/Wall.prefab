@@ -92,8 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2553586192843416104}
   - component: {fileID: 2553586192843416105}
-  - component: {fileID: 2553586192843416107}
   - component: {fileID: 2553586192843416080}
+  - component: {fileID: 2553586192843416107}
   m_Layer: 0
   m_Name: Rigidbody
   m_TagString: Tower
@@ -137,18 +137,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2553586192843416107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2553586192843416111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb373fe759442d6aa36ecbbb9af10e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2553586192843416080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,6 +163,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2553586192843416107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553586192843416111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb373fe759442d6aa36ecbbb9af10e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2553586193013050456
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveEntityController: {fileID: 2553586192843416107}
-  wallRigidbody: {fileID: 2553586192843416105}
+  objectsToRotate:
+  - {fileID: 2553586192843416111}
+  - {fileID: 8836476206355202195}
 --- !u!114 &6309234840498420791
 MonoBehaviour:
   m_ObjectHideFlags: 0

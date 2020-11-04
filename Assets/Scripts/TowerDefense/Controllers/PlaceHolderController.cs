@@ -9,11 +9,11 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private SpriteRenderer ringRenderer = null;
         [SerializeField] private string[] blockerTags = null;
-        [SerializeField] private PlaceableController[] placeablePrefabs = null;
+        [SerializeField] private WallController[] placeablePrefabs = null;
         [SerializeField] private GameObject[] models = null;
         [SerializeField] private Color allowedColor = Color.white;
         [SerializeField] private Color notAllowedColor = Color.white;
-        
+
         private readonly List<GameObject> _collisions = new List<GameObject>();
         private int _currentPlaceable = 0;
 
@@ -54,14 +54,14 @@ namespace TowerDefense.Controllers
             _currentPlaceable = i;
         }
 
-        public bool Place()
+        public bool Place(out WallController placedObject)
         {
+            placedObject = null;
             if (_collisions.Count != 0) return false;
-
-            var placeableInstance = Instantiate(placeablePrefabs[_currentPlaceable], transform.position, Quaternion.identity);
-            placeableInstance.Place(transform);
+            
+            placedObject = Instantiate(placeablePrefabs[_currentPlaceable], transform.position, Quaternion.identity);
+            placedObject.Place(transform);
             return true;
-
         }
         
         private void OnTriggerEnter2D(Collider2D other)

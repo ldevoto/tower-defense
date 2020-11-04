@@ -267,10 +267,10 @@ MonoBehaviour:
   - Player
   - Environment
   placeablePrefabs:
-  - {fileID: 1362909219250200170, guid: 4a7e1eabe1d4aba49a05bbb05ea482bf, type: 3}
-  - {fileID: 1362909219250200170, guid: b739392744f3a2a43b3284116f039355, type: 3}
-  - {fileID: 1362909219250200170, guid: a96c4ebc40eff2d408fba3f5db1c2627, type: 3}
-  - {fileID: 6309234840498420791, guid: 380ca935043729242a7d25a2e05b1d8f, type: 3}
+  - {fileID: 6240284307722050354, guid: 4a7e1eabe1d4aba49a05bbb05ea482bf, type: 3}
+  - {fileID: 6240284307722050354, guid: b739392744f3a2a43b3284116f039355, type: 3}
+  - {fileID: 6240284307722050354, guid: a96c4ebc40eff2d408fba3f5db1c2627, type: 3}
+  - {fileID: 2553586193013050457, guid: 380ca935043729242a7d25a2e05b1d8f, type: 3}
   models:
   - {fileID: 7566491482139261204}
   - {fileID: 2885038298396140888}

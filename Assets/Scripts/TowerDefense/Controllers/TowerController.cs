@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace TowerDefense.Controllers
 {
-    public class TowerController : MonoBehaviour
+    public class TowerController : WallController
     {
         [SerializeField] private WatcherController watcherController = null;
         [SerializeField] private ShooterController shooterController = null;
-        [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private Rigidbody2D towerRigidbody = null;
         [SerializeField] private float shotCooldown = 1f;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            Debug.Log("Start from Tower");
             aliveEntityController.SetHP(1000f);
-            aliveEntityController.OnKill += Kill;
             watcherController.OnTargetEnter += OnTargetEnter;
             watcherController.OnTargetLeave += OnTargetLeave;
         }
@@ -53,11 +53,6 @@ namespace TowerDefense.Controllers
                 towerRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
                 yield return null;
             }
-        }
-
-        private void Kill()
-        {
-            Destroy(gameObject);
         }
     }
 }

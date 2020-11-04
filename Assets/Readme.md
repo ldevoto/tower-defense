@@ -1,0 +1,19 @@
+﻿## TODOs
+- Agregar base + pergamino
+- Agregar win and lose
+- Contabilizar loot
+- Agregar presets
+  - Personaje
+  - Enemigos
+  - Torres
+  - Paredes
+  - Balas
+- Permitir colocar torres si alcanza el loot
+  - mostrarlo siempre debajo
+- Mejorar torres
+- Diferentes AIs
+  - Enemigos que interrumpen y no
+  - Enemigos que van a buscar al player y como secundario la base
+  - Enemigos que van a buscar solo la base
+- Agregar animaciones a todo
+- Daño de area para un tipo de bala
