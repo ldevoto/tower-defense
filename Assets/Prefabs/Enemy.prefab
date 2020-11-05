@@ -427,6 +427,7 @@ MonoBehaviour:
   targets:
   - Player
   - Tower
+  - Wall
 --- !u!1001 &2999740198985180560
 PrefabInstance:
   m_ObjectHideFlags: 0

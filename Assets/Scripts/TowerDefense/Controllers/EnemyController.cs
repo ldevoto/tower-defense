@@ -15,7 +15,6 @@ namespace TowerDefense.Controllers
         [SerializeField] private float damageCooldown = 0.5f;
         public Action OnKill = null;
         
-        /// <summary>The object that the AI should move to</summary>
         public Transform target;
         private Transform temporalTarget;
         IAstarAI ai;
@@ -33,7 +32,6 @@ namespace TowerDefense.Controllers
             if (ai != null) ai.onSearchPath -= Update;
         }
 
-        /// <summary>Updates the AI's destination every frame</summary>
         void Update () {
             if (temporalTarget)
             {

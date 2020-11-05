@@ -10,6 +10,7 @@ TagManager:
   - Position
   - PlaceHolder
   - Relic
+  - Wall
   layers:
   - Default
   - TransparentFX

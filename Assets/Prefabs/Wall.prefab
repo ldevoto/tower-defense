@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2553586192843416107}
   m_Layer: 0
   m_Name: Rigidbody
-  m_TagString: Tower
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
