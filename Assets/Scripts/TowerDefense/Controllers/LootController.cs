@@ -6,7 +6,7 @@ namespace TowerDefense.Controllers
     public class LootController : MonoBehaviour
     {
         [SerializeField] private Animator animator = null;
-        [SerializeField] private LootSO loot = null;
+        [SerializeField] private LootData loot = null;
         private Collider2D _collider2D = null;
         private static readonly int PickupAnim = Animator.StringToHash("Pickup");
 

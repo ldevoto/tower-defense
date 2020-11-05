@@ -6,10 +6,14 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private Transform target = null;
         [SerializeField] private Vector3 offset = Vector3.zero;
+        [SerializeField] private float smoothTime = 0.1F;
+        
+        private Vector3 _velocity = Vector3.zero;
 
         private void Update()
         {
-            transform.position = target.position + offset;
+            var targetPosition = target.position + offset;
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, smoothTime);
         }
     }
 }

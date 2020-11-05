@@ -6,8 +6,10 @@ namespace TowerDefense.Controllers
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private PlayerController playerControllerPrefab = null;
         [SerializeField] private EnemyController[] enemyPrefabs = null;
         [SerializeField] private int enemiesToSpawn = 10;
+        [SerializeField] private float spawnCooldown = 5;
 
         private PlayerController _playerController = null;
         private RelicController _relicController = null;
@@ -16,16 +18,38 @@ namespace TowerDefense.Controllers
         private int _spawnedEnemies = 0;
         private int _killedEnemies = 0;
 
-        private void Start()
+        private void Awake()
         {
-            _playerController = FindObjectOfType<PlayerController>();
             _relicController = FindObjectOfType<RelicController>();
             _graphController = FindObjectOfType<GraphController>();
+            SpawnPlayer();
+        }
+
+        private void Start()
+        {
             _relicController.OnForceFieldBroken += _graphController.UpdateCompleteGraph;
             _playerController.OnTowerPlaced += _graphController.UpdateCompleteGraph;
             _playerController.OnTowerRemoved += _graphController.UpdateCompleteGraph;
+            _playerController.OnKill += SpawnDelayedPlayer;
             _relicController.OnRelicTouched += PlayerLose;
             StartCoroutine(SpawnEnemies());
+        }
+
+        private void SpawnDelayedPlayer()
+        {
+            StartCoroutine(SpawnPlayerCoroutine());
+        }
+
+        private IEnumerator SpawnPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(spawnCooldown);
+            SpawnPlayer();
+        }
+
+        private void SpawnPlayer()
+        {
+            var spawnPoint = _relicController.GetSpawnPoint();
+            _playerController = Instantiate(playerControllerPrefab, spawnPoint, Quaternion.identity);
         }
 
         private IEnumerator SpawnEnemies()

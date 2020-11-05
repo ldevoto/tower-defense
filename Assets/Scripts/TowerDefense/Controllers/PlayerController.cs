@@ -12,11 +12,13 @@ namespace TowerDefense.Controllers
         [SerializeField] private PlaceHolderController placeHolderController = null;
         [SerializeField] private Rigidbody2D playerRigidbody = null;
         [SerializeField] private float speed = 1f;
-        public Action<LootSO> OnPickupLoot = null;
+        public Action OnPickupLoot = null;
         public Action OnTowerPlaced = null;
         public Action OnTowerRemoved = null;
+        public Action OnKill = null;
 
         private bool _constructionMode = false;
+        private int _currentLoot = 0;
 
         private void Awake()
         {
@@ -27,16 +29,23 @@ namespace TowerDefense.Controllers
         private void Start()
         {
             aliveEntityController.SetHP(100f);
+            aliveEntityController.OnKill += Kill;
         }
 
-        public void PickUp(LootSO loot)
+        public void PickUp(LootData loot)
         {
-            OnPickupLoot?.Invoke(loot);
+            _currentLoot += loot.quantity;
+            OnPickupLoot?.Invoke();
         }
 
         public Transform GetPlayerTransform()
         {
             return aliveEntityController.gameObject.transform;
+        }
+
+        public int GetCurrentLoot()
+        {
+            return _currentLoot;
         }
 
         private void Update()
@@ -89,6 +98,12 @@ namespace TowerDefense.Controllers
             playerRigidbody.MovePosition(playerRigidbody.transform.position + controls.GetMovement() * speed);
             playerRigidbody.MoveRotation(controls.GetRotation(playerRigidbody.transform));
             controls.ClearValues();
+        }
+
+        private void Kill()
+        {
+            Destroy(gameObject);
+            OnKill?.Invoke();
         }
     }
 }
