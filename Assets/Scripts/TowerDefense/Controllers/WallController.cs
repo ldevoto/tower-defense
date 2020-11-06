@@ -12,13 +12,22 @@ namespace TowerDefense.Controllers
         [SerializeField] private List<GameObject> objectsToRotate = null;
         public Action OnKill = null;
         
+        protected int _currentLevel = 0;
+        protected TowerData _currentLevelData = null;
+
         protected virtual void Start()
         {
-            Debug.Log("Start from Wall");
-            aliveEntityController.SetHP(2000f);
+            UpgradeToLevel(1);
             aliveEntityController.OnKill += Kill;
         }
-        
+
+        protected virtual void UpgradeToLevel(int currentLevel)
+        {
+            _currentLevel = currentLevel;
+            _currentLevelData = GetCurrentLevelData();
+            aliveEntityController.SetHP(_currentLevelData.hp);
+        }
+
         public void Place(Transform placeTransform)
         {
             foreach (var placeableObject in objectsToRotate)
@@ -40,6 +49,11 @@ namespace TowerDefense.Controllers
             }
 
             return levelsData[level - 1].cost;
+        }
+        
+        private TowerData GetCurrentLevelData()
+        {
+            return levelsData[_currentLevel - 1];
         }
 
         private void Kill()

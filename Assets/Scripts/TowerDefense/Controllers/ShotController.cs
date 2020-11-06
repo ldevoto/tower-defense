@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using TowerDefense.SO.Behaviour;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace TowerDefense.Controllers
 {
@@ -8,28 +8,49 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private Rigidbody2D shotRigidbody = null;
         [SerializeField] private float impulse = 5f;
-        [SerializeField] private float damage = 5;
         [SerializeField] private string[] targets = null;
-        [SerializeField] private int maxDamagedTargets = 1;
+        [SerializeField] private ShotBehaviour shotBehaviour = null;
 
-        private int _damagedTargets = 0;
-        private void Start()
+        private float _damage = 0f;
+        private int _collisions = 0;
+
+        public void ShotWith(float damage)
+        {
+            _damage = damage;
+            Shot();
+        }
+
+        public void Shot()
         {
             shotRigidbody.AddRelativeForce(Vector2.right * impulse, ForceMode2D.Impulse);
+        }
+
+        public float GetDamage()
+        {
+            return _damage;
+        }
+        
+        public void AddCollision()
+        {
+            _collisions++;
+        }
+
+        public int GetCollisions()
+        {
+            return _collisions;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (targets.Any(t => other.gameObject.CompareTag(t)))
             {
-                other.gameObject.GetComponent<AliveEntityController>().Damage(damage);
-                _damagedTargets++;
+                shotBehaviour.HandleCollision(this,other.gameObject.GetComponent<AliveEntityController>());
             }
+        }
 
-            if (_damagedTargets >= maxDamagedTargets)
-            {
-                Destroy(gameObject);
-            }
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }

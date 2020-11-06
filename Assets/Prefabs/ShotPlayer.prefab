@@ -167,7 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotRigidbody: {fileID: 3870357787682290463}
   impulse: 20
-  damage: 10
   targets:
   - Enemy
-  maxDamagedTargets: 1
+  shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}

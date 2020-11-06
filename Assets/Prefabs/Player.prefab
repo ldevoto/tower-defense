@@ -741,9 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98295ab82e4a4936a7f06f14636ed0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 3870357787682290458, guid: 74664e3135da0db4691d7b9776a04041, type: 3}
   shotOrigin: {fileID: 7786223658774110020}
-  shotCooldown: 0.05
 --- !u!1 &7786223659837524192
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,8 +795,8 @@ MonoBehaviour:
   aliveEntityController: {fileID: 7786223659604977299}
   placeHolderController: {fileID: 5498976865947966991}
   playerRigidbody: {fileID: 7786223659604977297}
-  speed: 2
   lootManager: {fileID: 11400000, guid: 2fc426680be89394a9e22954c41ef963, type: 2}
+  playerData: {fileID: 11400000, guid: abc59ccd609325e4eb7029bd51e1a79e, type: 2}
 --- !u!114 &7438910142172619526
 MonoBehaviour:
   m_ObjectHideFlags: 0

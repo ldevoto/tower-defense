@@ -2,14 +2,14 @@
 - [x] Agregar base + pergamino
 - [x] Agregar win and lose
 - [x] Contabilizar loot
-- [ ] Permitir colocar torres si alcanza el loot
-  - [ ] mostrarlo siempre debajo
+- [X] Permitir colocar torres si alcanza el loot
+  - [X] mostrarlo siempre debajo
 - [ ] Agregar presets
-  - [ ] Personaje
+  - [x] Personaje
   - [ ] Enemigos
-  - [ ] Torres
-  - [ ] Paredes
-  - [ ] Balas
+  - [x] Torres
+  - [x] Paredes
+  - [x] Balas
 - [ ] Mejorar torres
 - [ ] Diferentes AIs
   - [ ] Enemigos que interrumpen y no

@@ -2,9 +2,10 @@
 
 namespace TowerDefense.SO
 {
-    [CreateAssetMenu(fileName = "TowerData", menuName = "SO/TowerData", order = 4)]
-    public class TowerData : ScriptableObject
+    [CreateAssetMenu(fileName = "TowerData", menuName = "SO/Entity/TowerData", order = 0)]
+    public class TowerData : WallData
     {
-        public int cost = 50;
+        public float shotCooldown = 1f;
+        public ShotData shotData = null;
     }
 }

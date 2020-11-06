@@ -8,15 +8,18 @@ namespace TowerDefense.Controllers
         [SerializeField] private WatcherController watcherController = null;
         [SerializeField] private ShooterController shooterController = null;
         [SerializeField] private Rigidbody2D towerRigidbody = null;
-        [SerializeField] private float shotCooldown = 1f;
 
         protected override void Start()
         {
             base.Start();
-            Debug.Log("Start from Tower");
-            aliveEntityController.SetHP(1000f);
             watcherController.OnAliveEntityEnter += OnTargetEnter;
             watcherController.OnAliveEntityLeave += OnTargetLeave;
+        }
+
+        protected override void UpgradeToLevel(int currentLevel)
+        {
+            base.UpgradeToLevel(currentLevel);
+            shooterController.SetShotData(_currentLevelData.shotData);
         }
 
         private void OnTargetLeave(AliveEntityController obj)
@@ -36,8 +39,8 @@ namespace TowerDefense.Controllers
             {
                 if (!aliveEntity) break;
                 
-                shooterController.Shot();
-                yield return new WaitForSeconds(shotCooldown);
+                shooterController.ImmediateShot();
+                yield return new WaitForSeconds(_currentLevelData.shotCooldown);
             }
         }
 

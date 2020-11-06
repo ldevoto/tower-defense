@@ -11,8 +11,8 @@ namespace TowerDefense.Controllers
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private PlaceHolderController placeHolderController = null;
         [SerializeField] private Rigidbody2D playerRigidbody = null;
-        [SerializeField] private float speed = 1f;
         [SerializeField] private LootManager lootManager = null;
+        [SerializeField] private PlayerData playerData = null;
         
         public Action OnTowerPlaced = null;
         public Action OnTowerRemoved = null;
@@ -28,6 +28,8 @@ namespace TowerDefense.Controllers
 
         private void Start()
         {
+            shooterController.SetCooldown(playerData.shotCooldown);
+            shooterController.SetShotData(playerData.shotData);
             aliveEntityController.SetHP(100f);
             aliveEntityController.OnKill += Kill;
         }
@@ -40,11 +42,6 @@ namespace TowerDefense.Controllers
         public Transform GetPlayerTransform()
         {
             return aliveEntityController.gameObject.transform;
-        }
-
-        public int GetCurrentLoot()
-        {
-            return lootManager.GetCurrentLoot();
         }
 
         private void Update()
@@ -92,7 +89,7 @@ namespace TowerDefense.Controllers
 
         private void FixedUpdate()
         {
-            playerRigidbody.MovePosition(playerRigidbody.transform.position + controls.GetMovement() * speed);
+            playerRigidbody.MovePosition(playerRigidbody.transform.position + controls.GetMovement() * playerData.movementSpeed);
             playerRigidbody.MoveRotation(controls.GetRotation(playerRigidbody.transform));
             controls.ClearValues();
         }
