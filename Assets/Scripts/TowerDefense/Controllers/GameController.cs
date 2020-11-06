@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using TowerDefense.Controllers.AI;
+using TowerDefense.SO;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerController playerControllerPrefab = null;
         [SerializeField] private EnemyController[] enemyPrefabs = null;
         [SerializeField] private Transform[] spawnPoints = null;
@@ -21,6 +23,7 @@ namespace TowerDefense.Controllers
 
         private void Awake()
         {
+            lootManager.Restart();
             _relicController = FindObjectOfType<RelicController>();
             _graphController = FindObjectOfType<GraphController>();
             SpawnPlayer();

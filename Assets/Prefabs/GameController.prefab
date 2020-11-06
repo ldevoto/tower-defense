@@ -43,7 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb79f0d7ff564527a66ab3dfd4884fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootManager: {fileID: 11400000, guid: 2fc426680be89394a9e22954c41ef963, type: 2}
   playerControllerPrefab: {fileID: 7786223659837524193, guid: bc4ae784ef7aad84cac180fa929ec1c1, type: 3}
   enemyPrefabs:
   - {fileID: 2999740199457226809, guid: 80753385377bb0b489c8aa4c1cb51895, type: 3}
+  spawnPoints: []
   enemiesToSpawn: 10
+  spawnCooldown: 5

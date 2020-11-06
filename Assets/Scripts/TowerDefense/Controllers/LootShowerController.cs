@@ -10,20 +10,13 @@ namespace TowerDefense.Controllers
         [SerializeField] private float updateTime = 1f;
 
         private int _lastLootUpdate = 0;
-        private PlayerController _playerController = null;
 
-        private void Awake()
+        protected virtual void Start()
         {
-            _playerController = GetComponent<PlayerController>();
-        }
-
-        private void Start()
-        {
-            _playerController.OnPickupLoot += () => UpdateText(_playerController.GetCurrentLoot());
             SetText("0");
         }
 
-        private void UpdateText(int loot)
+        public void UpdateText(int loot)
         {
             StopAllCoroutines();
             StartCoroutine(UpdateTextCoroutine(loot));
@@ -40,6 +33,9 @@ namespace TowerDefense.Controllers
                 timePassed += Time.deltaTime;
                 yield return null;
             }
+
+            _lastLootUpdate = loot;
+            SetText(_lastLootUpdate.ToString());
         }
 
         private void SetText(string text)

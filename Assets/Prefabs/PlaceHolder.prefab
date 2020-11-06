@@ -95,19 +95,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringRenderer: {fileID: 7535887778438544765}
+  lootShowerController: {fileID: 0}
   blockerTags:
   - Position
   - Enemy
   - Player
   - Environment
-  placeablePrefabs:
-  - {fileID: 6240284307722050354, guid: 4a7e1eabe1d4aba49a05bbb05ea482bf, type: 3}
-  - {fileID: 2553586193013050457, guid: 380ca935043729242a7d25a2e05b1d8f, type: 3}
   models:
   - {fileID: 7322407757581889480}
   - {fileID: 159941891063447318}
   allowedColor: {r: 0.2807715, g: 1, b: 0, a: 1}
   notAllowedColor: {r: 1, g: 0, b: 0, a: 1}
+  lootManager: {fileID: 11400000, guid: 2fc426680be89394a9e22954c41ef963, type: 2}
 --- !u!1 &7535887778438544739
 GameObject:
   m_ObjectHideFlags: 0

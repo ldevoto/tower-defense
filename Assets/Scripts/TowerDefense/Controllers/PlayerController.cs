@@ -12,13 +12,13 @@ namespace TowerDefense.Controllers
         [SerializeField] private PlaceHolderController placeHolderController = null;
         [SerializeField] private Rigidbody2D playerRigidbody = null;
         [SerializeField] private float speed = 1f;
-        public Action OnPickupLoot = null;
+        [SerializeField] private LootManager lootManager = null;
+        
         public Action OnTowerPlaced = null;
         public Action OnTowerRemoved = null;
         public Action OnKill = null;
 
         private bool _constructionMode = false;
-        private int _currentLoot = 0;
 
         private void Awake()
         {
@@ -34,8 +34,7 @@ namespace TowerDefense.Controllers
 
         public void PickUp(LootData loot)
         {
-            _currentLoot += loot.quantity;
-            OnPickupLoot?.Invoke();
+            lootManager.AddLoot(loot.quantity);
         }
 
         public Transform GetPlayerTransform()
@@ -45,7 +44,7 @@ namespace TowerDefense.Controllers
 
         public int GetCurrentLoot()
         {
-            return _currentLoot;
+            return lootManager.GetCurrentLoot();
         }
 
         private void Update()
@@ -93,8 +92,6 @@ namespace TowerDefense.Controllers
 
         private void FixedUpdate()
         {
-            //Debug.LogFormat("{0}", controls.GetMovement().ToString("F6"));
-            //Debug.LogFormat("{0}", controls.GetRotation(playerRigidbody.transform).ToString("F4"));
             playerRigidbody.MovePosition(playerRigidbody.transform.position + controls.GetMovement() * speed);
             playerRigidbody.MoveRotation(controls.GetRotation(playerRigidbody.transform));
             controls.ClearValues();

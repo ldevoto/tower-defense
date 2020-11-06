@@ -420,6 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0c1ed99d4f42128d11e350b6dce31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsData:
+  - {fileID: 11400000, guid: 090cac575e2aabf4ea248bc49d8a07ba, type: 2}
   aliveEntityController: {fileID: 6240284307484783936}
   objectsToRotate:
   - {fileID: 6240284307484783940}

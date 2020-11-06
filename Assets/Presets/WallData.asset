@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abed66df22c4dd88d59f93bf465470c, type: 3}
   m_Name: WallData
   m_EditorClassIdentifier: 
-  cost: 50
+  cost: 30
