@@ -8,8 +8,6 @@ namespace TowerDefense.Controllers
     public class WatcherController : MonoBehaviour
     {
         [SerializeField] private string[] targets = null;
-        public Action<GameObject> OnTargetEnter = null;
-        public Action<GameObject> OnTargetLeave = null;
         public Action<AliveEntityController> OnAliveEntityEnter = null;
         public Action<AliveEntityController> OnAliveEntityLeave = null;
 
@@ -17,7 +15,6 @@ namespace TowerDefense.Controllers
 
         private Color _hideColor = Color.white;
         private Color _showColor = Color.white;
-        private GameObject _target = null;
         private AliveEntityController _aliveEntity = null;
 
         private void Awake()
@@ -26,11 +23,6 @@ namespace TowerDefense.Controllers
             _showColor = _spriteRenderer.color;
             _hideColor = new Color(1f, 1f, 1f, 0f);
             HideGizmo();
-        }
-
-        public GameObject GetTarget()
-        {
-            return _target;
         }
 
         public void SetSize(float size)
@@ -50,14 +42,10 @@ namespace TowerDefense.Controllers
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (_target) return;
+            if (_aliveEntity) return;
             if (!targets.Any(t => other.gameObject.CompareTag(t))) return;
 
-            var otherGameObject = other.gameObject;
-            _target = otherGameObject;
-            OnTargetEnter?.Invoke(otherGameObject);
-            
-            var aliveEntity = otherGameObject.GetComponent<AliveEntityController>();
+            var aliveEntity = other.gameObject.GetComponent<AliveEntityController>();
             if (!aliveEntity) return;
             
             _aliveEntity = aliveEntity;
@@ -66,15 +54,12 @@ namespace TowerDefense.Controllers
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (_target != other.gameObject) return;
+            if (!_aliveEntity) return;
+            
+            var aliveEntity = other.gameObject.GetComponent<AliveEntityController>();
+            
+            if (_aliveEntity != aliveEntity) return;
 
-            _target = null;
-            var otherGameObject = other.gameObject;
-            OnTargetLeave?.Invoke(otherGameObject);
-            
-            var aliveEntity = otherGameObject.GetComponent<AliveEntityController>();
-            if (!aliveEntity) return;
-            
             _aliveEntity = null;
             OnAliveEntityLeave?.Invoke(aliveEntity);
         }

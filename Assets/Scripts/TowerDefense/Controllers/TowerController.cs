@@ -15,39 +15,39 @@ namespace TowerDefense.Controllers
             base.Start();
             Debug.Log("Start from Tower");
             aliveEntityController.SetHP(1000f);
-            watcherController.OnTargetEnter += OnTargetEnter;
-            watcherController.OnTargetLeave += OnTargetLeave;
+            watcherController.OnAliveEntityEnter += OnTargetEnter;
+            watcherController.OnAliveEntityLeave += OnTargetLeave;
         }
 
-        private void OnTargetLeave(GameObject obj)
+        private void OnTargetLeave(AliveEntityController obj)
         {
             StopAllCoroutines();
         }
 
-        private void OnTargetEnter(GameObject target)
+        private void OnTargetEnter(AliveEntityController aliveEntity)
         {
-            StartCoroutine(FollowEnemy(target));
-            StartCoroutine(ShotEnemy(target));
+            StartCoroutine(FollowEnemy(aliveEntity));
+            StartCoroutine(ShotEnemy(aliveEntity));
         }
 
-        private IEnumerator ShotEnemy(GameObject target)
+        private IEnumerator ShotEnemy(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!target) break;
+                if (!aliveEntity) break;
                 
                 shooterController.Shot();
                 yield return new WaitForSeconds(shotCooldown);
             }
         }
 
-        private IEnumerator FollowEnemy(GameObject target)
+        private IEnumerator FollowEnemy(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!target) break;
+                if (!aliveEntity) break;
                 
-                var direction = target.transform.position - towerRigidbody.transform.position;
+                var direction = aliveEntity.transform.position - towerRigidbody.transform.position;
                 direction.z = 0;
                 var rotation = Vector2.SignedAngle(Vector2.right, direction);
                 towerRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);

@@ -384,7 +384,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6240284307722050353}
   - component: {fileID: 6240284307722050354}
-  - component: {fileID: 1362909219250200170}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -429,21 +428,6 @@ MonoBehaviour:
   shooterController: {fileID: 6240284307484783967}
   towerRigidbody: {fileID: 6240284307484783938}
   shotCooldown: 1
---- !u!114 &1362909219250200170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6240284307722050355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45cc891867764b8c9494fd08eb650651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeableObjects:
-  - {fileID: 6240284307484783940}
-  - {fileID: 512505268197039060}
 --- !u!1001 &5153626952494549982
 PrefabInstance:
   m_ObjectHideFlags: 0

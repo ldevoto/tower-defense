@@ -9,8 +9,7 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private SpriteRenderer ringRenderer = null;
         [SerializeField] private string[] blockerTags = null;
-        [SerializeField] private WallController[] placeablePrefabs = null;
-        [SerializeField] private GameObject[] models = null;
+        [SerializeField] private ModelController[] models = null;
         [SerializeField] private Color allowedColor = Color.white;
         [SerializeField] private Color notAllowedColor = Color.white;
 
@@ -21,7 +20,7 @@ namespace TowerDefense.Controllers
         {
             foreach (var model in models)
             {
-                model.SetActive(false);
+                model.gameObject.SetActive(false);
             }
             SetCurrentPlaceable(0);
             ringRenderer.color = allowedColor;
@@ -30,7 +29,7 @@ namespace TowerDefense.Controllers
         public void Next()
         {
             var newPlaceable = _currentPlaceable + 1;
-            if (newPlaceable >= placeablePrefabs.Length)
+            if (newPlaceable >= models.Length)
             {
                 newPlaceable = 0;
             }
@@ -42,15 +41,15 @@ namespace TowerDefense.Controllers
             var newPlaceable = _currentPlaceable - 1;
             if (newPlaceable < 0)
             {
-                newPlaceable = placeablePrefabs.Length - 1;
+                newPlaceable = models.Length - 1;
             }
             SetCurrentPlaceable(newPlaceable);
         }
 
         private void SetCurrentPlaceable(int i)
         {
-            models[_currentPlaceable].SetActive(false);
-            models[i].SetActive(true);
+            models[_currentPlaceable].gameObject.SetActive(false);
+            models[i].gameObject.SetActive(true);
             _currentPlaceable = i;
         }
 
@@ -59,7 +58,7 @@ namespace TowerDefense.Controllers
             placedObject = null;
             if (_collisions.Count != 0) return false;
             
-            placedObject = Instantiate(placeablePrefabs[_currentPlaceable], transform.position, Quaternion.identity);
+            placedObject = Instantiate(models[_currentPlaceable].GetPrefab(), transform.position, Quaternion.identity);
             placedObject.Place(transform);
             return true;
         }

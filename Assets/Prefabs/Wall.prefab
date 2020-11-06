@@ -185,7 +185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2553586193013050458}
   - component: {fileID: 2553586193013050457}
-  - component: {fileID: 6309234840498420791}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -222,23 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03f5a164b01456eb264167592501272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsData: []
   aliveEntityController: {fileID: 2553586192843416107}
   objectsToRotate:
-  - {fileID: 2553586192843416111}
-  - {fileID: 8836476206355202195}
---- !u!114 &6309234840498420791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2553586193013050456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45cc891867764b8c9494fd08eb650651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeableObjects:
   - {fileID: 2553586192843416111}
   - {fileID: 8836476206355202195}
 --- !u!1 &8836476206355202195

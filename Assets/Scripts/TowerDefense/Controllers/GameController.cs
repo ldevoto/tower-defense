@@ -8,6 +8,7 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private PlayerController playerControllerPrefab = null;
         [SerializeField] private EnemyController[] enemyPrefabs = null;
+        [SerializeField] private Transform[] spawnPoints = null;
         [SerializeField] private int enemiesToSpawn = 10;
         [SerializeField] private float spawnCooldown = 5;
 
@@ -28,9 +29,6 @@ namespace TowerDefense.Controllers
         private void Start()
         {
             _relicController.OnForceFieldBroken += _graphController.UpdateCompleteGraph;
-            _playerController.OnTowerPlaced += _graphController.UpdateCompleteGraph;
-            _playerController.OnTowerRemoved += _graphController.UpdateCompleteGraph;
-            _playerController.OnKill += SpawnDelayedPlayer;
             _relicController.OnRelicTouched += PlayerLose;
             StartCoroutine(SpawnEnemies());
         }
@@ -50,6 +48,9 @@ namespace TowerDefense.Controllers
         {
             var spawnPoint = _relicController.GetSpawnPoint();
             _playerController = Instantiate(playerControllerPrefab, spawnPoint, Quaternion.identity);
+            _playerController.OnTowerPlaced += _graphController.UpdateCompleteGraph;
+            _playerController.OnTowerRemoved += _graphController.UpdateCompleteGraph;
+            _playerController.OnKill += SpawnDelayedPlayer;
         }
 
         private IEnumerator SpawnEnemies()
@@ -64,7 +65,8 @@ namespace TowerDefense.Controllers
         private void SpawnEnemy()
         {
             _spawnedEnemies++;
-            var enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], new Vector3(-10, Random.Range(-5, 5.0f), 0), Quaternion.identity);
+            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            var enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPoint.position, spawnPoint.rotation);
             enemyInstance.target = _relicController.transform;
             enemyInstance.OnKill += HandleEnemyKilled;
         }
