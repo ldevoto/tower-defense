@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183401b1f21c4159a3043d0e0dd3440f, type: 3}
-  m_Name: ShotTowerSniperData
+  m_Script: {fileID: 11500000, guid: 9abed66df22c4dd88d59f93bf465470c, type: 3}
+  m_Name: WallData2
   m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 3870357787682290460, guid: ff383c6a21295cb49ae06be0a6abde8e, type: 3}
-  damage: 20
+  hp: 250
+  cost: 50
+  shotCooldown: 1
+  shotData: {fileID: 0}

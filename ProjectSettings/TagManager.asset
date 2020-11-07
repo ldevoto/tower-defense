@@ -11,6 +11,7 @@ TagManager:
   - PlaceHolder
   - Relic
   - Wall
+  - RelicField
   layers:
   - Default
   - TransparentFX
@@ -51,9 +52,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI In Game
-    uniqueID: 1031554753
+  - name: Enemy
+    uniqueID: 2227078141
+    locked: 0
+  - name: Tower
+    uniqueID: 1474229369
+    locked: 0
+  - name: Player
+    uniqueID: 1694854449
     locked: 0
   - name: FX
     uniqueID: 2155389697
+    locked: 0
+  - name: UI In Game
+    uniqueID: 1031554753
     locked: 0

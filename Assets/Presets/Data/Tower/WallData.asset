@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WallData
   m_EditorClassIdentifier: 
   hp: 150
-  cost: 35
+  cost: 0
   shotCooldown: 1
   shotData: {fileID: 0}

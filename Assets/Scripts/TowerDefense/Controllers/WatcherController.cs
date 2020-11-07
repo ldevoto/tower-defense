@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense.Controllers
 {
-    [RequireComponent(typeof(CircleCollider2D), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(CircleCollider2D))]
     public class WatcherController : MonoBehaviour
     {
         [SerializeField] private string[] targets = null;
@@ -20,8 +20,11 @@ namespace TowerDefense.Controllers
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _showColor = _spriteRenderer.color;
-            _hideColor = new Color(1f, 1f, 1f, 0f);
+            if (_spriteRenderer)
+            {
+                _showColor = _spriteRenderer.color;
+                _hideColor = new Color(1f, 1f, 1f, 0f);
+            }
             HideGizmo();
         }
 
@@ -32,12 +35,18 @@ namespace TowerDefense.Controllers
 
         public void ShowGizmo()
         {
-            _spriteRenderer.color = _showColor;
+            if (_spriteRenderer)
+            {
+                _spriteRenderer.color = _showColor;
+            }
         }
 
         public void HideGizmo()
         {
-            _spriteRenderer.color = _hideColor;
+            if (_spriteRenderer)
+            {
+                _spriteRenderer.color = _hideColor;
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)

@@ -11,6 +11,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private PlaceHolderController placeHolderController = null;
         [SerializeField] private Rigidbody2D playerRigidbody = null;
+        [SerializeField] private WatcherController watcherController = null;
         [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerData playerData = null;
         
@@ -18,6 +19,7 @@ namespace TowerDefense.Controllers
         public Action OnTowerRemoved = null;
         public Action OnKill = null;
 
+        private WallController _wallController = null;
         private bool _constructionMode = false;
 
         private void Awake()
@@ -32,6 +34,20 @@ namespace TowerDefense.Controllers
             shooterController.SetShotData(playerData.shotData);
             aliveEntityController.SetHP(100f);
             aliveEntityController.OnKill += Kill;
+            watcherController.OnAliveEntityEnter += OnAliveEntityEnter;
+            watcherController.OnAliveEntityLeave += OnAliveEntityLeave;
+        }
+        
+        private void OnAliveEntityEnter(AliveEntityController aliveEntity)
+        {
+            _wallController = aliveEntity.GetComponentInParent<WallController>();
+            _wallController.ShowUpgrade();
+        }
+
+        private void OnAliveEntityLeave(AliveEntityController aliveEntity)
+        {
+            _wallController.HideUpgrade();
+            _wallController = null;
         }
 
         public void PickUp(LootData loot)

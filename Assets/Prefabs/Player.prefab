@@ -362,6 +362,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 7716349001982121171}
   updateTime: 0.1
+--- !u!1 &6870311988019674195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4551627013608367739}
+  - component: {fileID: 3554863132910493955}
+  - component: {fileID: 3806681519986079756}
+  m_Layer: 0
+  m_Name: UpgradeWatcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4551627013608367739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870311988019674195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7786223659604977296}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3554863132910493955
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870311988019674195}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.7
+--- !u!114 &3806681519986079756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870311988019674195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b7e7694a064e0ba2326079ef302127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - Tower
+  - Wall
 --- !u!1 &7162727286149589599
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,8 +692,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1694854449
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8d774e4587d24c34581d5ce7ddc2096b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -677,6 +740,7 @@ Transform:
   - {fileID: 7786223659159663398}
   - {fileID: 7786223658774110020}
   - {fileID: 5498976865947966984}
+  - {fileID: 4551627013608367739}
   m_Father: {fileID: 7786223659837524194}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -795,6 +859,7 @@ MonoBehaviour:
   aliveEntityController: {fileID: 7786223659604977299}
   placeHolderController: {fileID: 5498976865947966991}
   playerRigidbody: {fileID: 7786223659604977297}
+  watcherController: {fileID: 3806681519986079756}
   lootManager: {fileID: 11400000, guid: 2fc426680be89394a9e22954c41ef963, type: 2}
   playerData: {fileID: 11400000, guid: abc59ccd609325e4eb7029bd51e1a79e, type: 2}
 --- !u!114 &7438910142172619526

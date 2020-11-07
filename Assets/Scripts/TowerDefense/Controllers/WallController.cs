@@ -9,6 +9,7 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private TowerData[] levelsData = null;
         [SerializeField] protected AliveEntityController aliveEntityController = null;
+        [SerializeField] private UpgradeShowerController upgradeShower = null;
         [SerializeField] private List<GameObject> objectsToRotate = null;
         public Action OnKill = null;
         
@@ -28,6 +29,32 @@ namespace TowerDefense.Controllers
             aliveEntityController.SetHP(_currentLevelData.hp);
         }
 
+        public int GetUpgradeCost()
+        {
+            return GetLevelCost(_currentLevel + 1);
+        }
+
+        public bool ShowUpgrade()
+        {
+            if (_currentLevel >= levelsData.Length)
+            {
+                return false;
+            }
+
+            upgradeShower.ShowCost(GetLevelCost(_currentLevel + 1));
+            return true;
+        }
+
+        public void HideUpgrade()
+        {
+            upgradeShower.Hide();
+        }
+
+        public void BuyUpgrade()
+        {
+            upgradeShower.Buy();
+        }
+
         public void Place(Transform placeTransform)
         {
             foreach (var placeableObject in objectsToRotate)
@@ -36,11 +63,6 @@ namespace TowerDefense.Controllers
             }
         }
 
-        public int GetPlacingCost()
-        {
-            return GetLevelCost(1);
-        }
-        
         private int GetLevelCost(int level)
         {
             if (level > levelsData.Length)

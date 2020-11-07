@@ -11,6 +11,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private Rigidbody2D towerRigidbody = null;
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Shot = Animator.StringToHash("Shot");
+        private static readonly int Waiting = Animator.StringToHash("Waiting");
 
         protected override void Start()
         {
@@ -23,6 +24,7 @@ namespace TowerDefense.Controllers
         {
             base.UpgradeToLevel(currentLevel);
             shooterController.SetShotData(_currentLevelData.shotData);
+            shooterController.SetCooldown(_currentLevelData.shotCooldown);
         }
 
         private void OnTargetLeave(AliveEntityController obj)
@@ -43,8 +45,8 @@ namespace TowerDefense.Controllers
             {
                 if (!aliveEntity) break;
                 
+                yield return new WaitForSeconds(shooterController.GetWaitToNextShot());
                 towerAnimator.SetTrigger(Shot);
-                //yield return new WaitForSeconds(0.05f);
                 shooterController.ImmediateShot();
                 yield return new WaitForSeconds(_currentLevelData.shotCooldown);
             }
@@ -52,6 +54,7 @@ namespace TowerDefense.Controllers
 
         private IEnumerator FollowEnemy(AliveEntityController aliveEntity)
         {
+            towerAnimator.SetTrigger(Waiting);
             while (true)
             {
                 if (!aliveEntity) break;
