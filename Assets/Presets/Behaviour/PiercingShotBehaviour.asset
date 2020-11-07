@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd0b3a10d2849f690f9e1b431f5b12d, type: 3}
   m_Name: PiercingShotBehaviour
   m_EditorClassIdentifier: 
-  piercingCount: 2
+  piercingCount: 3

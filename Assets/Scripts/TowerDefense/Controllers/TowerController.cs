@@ -44,7 +44,7 @@ namespace TowerDefense.Controllers
                 if (!aliveEntity) break;
                 
                 towerAnimator.SetTrigger(Shot);
-                yield return new WaitForSeconds(0.05f);
+                //yield return new WaitForSeconds(0.05f);
                 shooterController.ImmediateShot();
                 yield return new WaitForSeconds(_currentLevelData.shotCooldown);
             }
