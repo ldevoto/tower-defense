@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abed66df22c4dd88d59f93bf465470c, type: 3}
   m_Name: TowerData
   m_EditorClassIdentifier: 
-  hp: 100
-  cost: 50
+  hp: 150
+  cost: 0
   shotCooldown: 1
   shotData: {fileID: 11400000, guid: 513482a18bb3a4543bec558170ac9472, type: 2}

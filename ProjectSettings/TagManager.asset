@@ -54,3 +54,6 @@ TagManager:
   - name: UI In Game
     uniqueID: 1031554753
     locked: 0
+  - name: FX
+    uniqueID: 2155389697
+    locked: 0

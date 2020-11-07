@@ -68,11 +68,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2139577599
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.9056604, g: 0.6536134, b: 0.66291046, a: 1}
+  m_Color: {r: 0.9433962, g: 0.30704877, b: 0.32693464, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -167,8 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotRigidbody: {fileID: 3870357787682290463}
   impulse: 20
-  damage: 5
   targets:
   - Player
   - Tower
-  maxDamagedTargets: 1
+  shotBehaviour: {fileID: 0}

@@ -9,16 +9,14 @@ namespace TowerDefense.Controllers
     [RequireComponent(typeof(Collider2D))]
     public class PlaceHolderController : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer ringRenderer = null;
         [SerializeField] private LootShowerController lootShowerController = null;
         [SerializeField] private string[] blockerTags = null;
         [SerializeField] private ModelController[] models = null;
-        [SerializeField] private Color allowedColor = Color.white;
-        [SerializeField] private Color notAllowedColor = Color.white;
         [SerializeField] private LootManager lootManager = null;
 
         private readonly List<GameObject> _collisions = new List<GameObject>();
         private int _currentPlaceable = 0;
+        private bool _isAllowedPosition = true;
 
         private void Awake()
         {
@@ -28,12 +26,12 @@ namespace TowerDefense.Controllers
                 model.gameObject.SetActive(false);
             }
             SetCurrentPlaceable(0);
-            ringRenderer.color = allowedColor;
         }
 
         private void OnEnable()
         {
             lootShowerController.gameObject.SetActive(true);
+            ChangeAllowedPosition(true);
             UpdateLoot();
         }
 
@@ -84,6 +82,7 @@ namespace TowerDefense.Controllers
             models[_currentPlaceable].gameObject.SetActive(false);
             models[i].gameObject.SetActive(true);
             _currentPlaceable = i;
+            ChangeAllowedPosition(_isAllowedPosition);
             UpdateLoot();
         }
 
@@ -97,7 +96,10 @@ namespace TowerDefense.Controllers
             if (blockerTags.Any(blockerTag => other.gameObject.CompareTag(blockerTag)))
             {
                 _collisions.Add(other.gameObject);
-                ringRenderer.color = notAllowedColor;
+                if (_collisions.Count == 1)
+                {
+                    ChangeAllowedPosition(false);
+                } 
             }
         }
 
@@ -108,9 +110,15 @@ namespace TowerDefense.Controllers
                 _collisions.Remove(other.gameObject);
                 if (_collisions.Count == 0)
                 {
-                    ringRenderer.color = allowedColor;
+                    ChangeAllowedPosition(true);
                 }
             }
+        }
+        
+        private void ChangeAllowedPosition(bool allowedPosition)
+        {
+            _isAllowedPosition = allowedPosition;
+            models[_currentPlaceable].ChangeAllowedPosition(allowedPosition);
         }
     }
 }
