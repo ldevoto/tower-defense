@@ -339,6 +339,7 @@ MonoBehaviour:
   levelsData:
   - {fileID: 11400000, guid: 090cac575e2aabf4ea248bc49d8a07ba, type: 2}
   - {fileID: 11400000, guid: 56e9a2d415a44044886bfa9563cbfd0d, type: 2}
+  - {fileID: 11400000, guid: e8e70bdd19db4ac40ac5813ac60e2ef0, type: 2}
   aliveEntityController: {fileID: 6240284307484783936}
   upgradeShower: {fileID: 3158117636362924721}
   objectsToRotate:

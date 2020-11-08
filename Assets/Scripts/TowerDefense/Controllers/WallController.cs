@@ -23,45 +23,7 @@ namespace TowerDefense.Controllers
             UpgradeToLevel(1);
             aliveEntityController.OnKill += Kill;
         }
-
-        protected virtual void UpgradeToLevel(int currentLevel)
-        {
-            if (Animator)
-            {
-                Destroy(Animator);
-            }
-            CurrentLevel = currentLevel;
-            CurrentLevelData = GetCurrentLevelData();
-            Animator = Instantiate(CurrentLevelData.animator, objectRigidbody.gameObject.transform);
-            aliveEntityController.SetHP(CurrentLevelData.hp);
-        }
-
-        public int GetUpgradeCost()
-        {
-            return GetLevelCost(CurrentLevel + 1);
-        }
-
-        public bool ShowUpgrade()
-        {
-            if (CurrentLevel >= levelsData.Length)
-            {
-                return false;
-            }
-
-            upgradeShower.ShowCost(GetLevelCost(CurrentLevel + 1));
-            return true;
-        }
-
-        public void HideUpgrade()
-        {
-            upgradeShower.Hide();
-        }
-
-        public void BuyUpgrade()
-        {
-            upgradeShower.Buy();
-        }
-
+        
         public void Place(Transform placeTransform)
         {
             foreach (var placeableObject in objectsToRotate)
@@ -70,19 +32,75 @@ namespace TowerDefense.Controllers
             }
         }
 
-        private int GetLevelCost(int level)
+        protected virtual void UpgradeToLevel(int level)
         {
-            if (level > levelsData.Length)
+            if (Animator)
             {
-                throw new Exception("level not configured");
+                Destroy(Animator.gameObject);
             }
+            CurrentLevel = level;
+            CurrentLevelData = GetCurrentLevelData();
+            Animator = Instantiate(CurrentLevelData.animator, objectRigidbody.gameObject.transform);
+            aliveEntityController.SetHP(CurrentLevelData.hp);
+        }
 
-            return levelsData[level - 1].cost;
+        public bool ShowUpgrade()
+        {
+            if (!HasUpgrade()) return false;
+
+            upgradeShower.ShowCost(GetUpgradeCost());
+            return true;
         }
         
+        public bool TryBuyUpgrade(LootManager lootManager)
+        {
+            if (!HasUpgrade()) return false;
+            if (lootManager.GetCurrentLoot() < GetUpgradeCost()) return false;
+            
+            BuyUpgrade(lootManager);
+            return true;
+        }
+
+        public void HideUpgrade()
+        {
+            upgradeShower.Hide();
+        }
+
+        public void BuyUpgrade(LootManager lootManager)
+        {
+            lootManager.RemoveLoot(GetUpgradeCost());
+            upgradeShower.Buy();
+            UpgradeToLevel(CurrentLevel + 1);
+        }
+        
+        public int GetUpgradeCost()
+        {
+            return GetUpgradeLevelData().cost;
+        }
+
         private TowerData GetCurrentLevelData()
         {
-            return levelsData[CurrentLevel - 1];
+            return GetLevelData(CurrentLevel);
+        }
+
+        private TowerData GetUpgradeLevelData()
+        {
+            return GetLevelData(CurrentLevel + 1);
+        }
+
+        private TowerData GetLevelData(int level)
+        {
+            return HasLevel(level) ? levelsData[level - 1] : null;
+        }
+        
+        public bool HasUpgrade()
+        {
+            return HasLevel(CurrentLevel + 1);
+        }
+
+        private bool HasLevel(int level)
+        {
+            return level <= levelsData.Length;
         }
 
         private void Kill()

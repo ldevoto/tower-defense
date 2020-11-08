@@ -11,7 +11,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private PlaceHolderController placeHolderController = null;
         [SerializeField] private Rigidbody2D playerRigidbody = null;
-        [SerializeField] private WatcherController watcherController = null;
+        [SerializeField] private UpgradeWatcherController watcherController = null;
         [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerData playerData = null;
         
@@ -34,17 +34,17 @@ namespace TowerDefense.Controllers
             shooterController.SetShotData(playerData.shotData);
             aliveEntityController.SetHP(100f);
             aliveEntityController.OnKill += Kill;
-            watcherController.OnAliveEntityEnter += OnAliveEntityEnter;
-            watcherController.OnAliveEntityLeave += OnAliveEntityLeave;
+            watcherController.OnTowerEnter += OnTowerEnter;
+            watcherController.OnTowerLeave += OnTowerLeave;
         }
         
-        private void OnAliveEntityEnter(AliveEntityController aliveEntity)
+        private void OnTowerEnter(WallController wallController)
         {
-            _wallController = aliveEntity.GetComponentInParent<WallController>();
+            _wallController = wallController;
             _wallController.ShowUpgrade();
         }
 
-        private void OnAliveEntityLeave(AliveEntityController aliveEntity)
+        private void OnTowerLeave(WallController wallController)
         {
             _wallController.HideUpgrade();
             _wallController = null;
@@ -55,17 +55,20 @@ namespace TowerDefense.Controllers
             lootManager.AddLoot(loot.quantity);
         }
 
-        public Transform GetPlayerTransform()
-        {
-            return aliveEntityController.gameObject.transform;
-        }
-
         private void Update()
         {
             controls.Update();
             if (controls.GetAction3())
             {
                 SetConstructionMode(!_constructionMode);
+            }
+
+            if (_wallController && controls.GetAction2())
+            {
+                if (_wallController.TryBuyUpgrade(lootManager))
+                {
+                    watcherController.ClearWatcher();
+                }
             }
 
             if (_constructionMode)
