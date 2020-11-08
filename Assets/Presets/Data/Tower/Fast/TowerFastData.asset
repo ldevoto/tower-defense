@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abed66df22c4dd88d59f93bf465470c, type: 3}
-  m_Name: WallData2
+  m_Name: TowerFastData
   m_EditorClassIdentifier: 
-  hp: 250
-  cost: 50
+  animator: {fileID: 1618488556276924732, guid: 22eda66342d8c0c4eb2277d0c2bf20fa, type: 3}
+  hp: 150
+  cost: 0
   shotCooldown: 1
-  shotData: {fileID: 0}
+  shotData: {fileID: 11400000, guid: 513482a18bb3a4543bec558170ac9472, type: 2}

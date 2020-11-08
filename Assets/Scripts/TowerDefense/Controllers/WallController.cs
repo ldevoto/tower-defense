@@ -11,10 +11,12 @@ namespace TowerDefense.Controllers
         [SerializeField] protected AliveEntityController aliveEntityController = null;
         [SerializeField] private UpgradeShowerController upgradeShower = null;
         [SerializeField] private List<GameObject> objectsToRotate = null;
+        [SerializeField] protected Rigidbody2D objectRigidbody = null;
         public Action OnKill = null;
         
-        protected int _currentLevel = 0;
-        protected TowerData _currentLevelData = null;
+        protected int CurrentLevel = 1;
+        protected TowerData CurrentLevelData = null;
+        protected Animator Animator = null;
 
         protected virtual void Start()
         {
@@ -24,24 +26,29 @@ namespace TowerDefense.Controllers
 
         protected virtual void UpgradeToLevel(int currentLevel)
         {
-            _currentLevel = currentLevel;
-            _currentLevelData = GetCurrentLevelData();
-            aliveEntityController.SetHP(_currentLevelData.hp);
+            if (Animator)
+            {
+                Destroy(Animator);
+            }
+            CurrentLevel = currentLevel;
+            CurrentLevelData = GetCurrentLevelData();
+            Animator = Instantiate(CurrentLevelData.animator, objectRigidbody.gameObject.transform);
+            aliveEntityController.SetHP(CurrentLevelData.hp);
         }
 
         public int GetUpgradeCost()
         {
-            return GetLevelCost(_currentLevel + 1);
+            return GetLevelCost(CurrentLevel + 1);
         }
 
         public bool ShowUpgrade()
         {
-            if (_currentLevel >= levelsData.Length)
+            if (CurrentLevel >= levelsData.Length)
             {
                 return false;
             }
 
-            upgradeShower.ShowCost(GetLevelCost(_currentLevel + 1));
+            upgradeShower.ShowCost(GetLevelCost(CurrentLevel + 1));
             return true;
         }
 
@@ -75,7 +82,7 @@ namespace TowerDefense.Controllers
         
         private TowerData GetCurrentLevelData()
         {
-            return levelsData[_currentLevel - 1];
+            return levelsData[CurrentLevel - 1];
         }
 
         private void Kill()

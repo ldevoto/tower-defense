@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abed66df22c4dd88d59f93bf465470c, type: 3}
-  m_Name: TowerSniperData
+  m_Name: WallData
   m_EditorClassIdentifier: 
-  hp: 200
+  animator: {fileID: 1618488556276924732, guid: 0b62d31591c6a13498a2899a23b204a6, type: 3}
+  hp: 150
   cost: 0
-  shotCooldown: 1.5
-  shotData: {fileID: 11400000, guid: 1423b49f110005a43aaa836eebd67906, type: 2}
+  shotCooldown: 1
+  shotData: {fileID: 0}
