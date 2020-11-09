@@ -11,11 +11,14 @@ namespace TowerDefense.Controllers
         
         private static readonly int HideParam = Animator.StringToHash("Hide");
         private static readonly int BuyParam = Animator.StringToHash("Buy");
+        private static readonly int ShowParam = Animator.StringToHash("Show");
 
         public void ShowCost(int cost)
         {
+            StopAllCoroutines();
             costText.text = cost.ToString();
             gameObject.SetActive(true);
+            animator.SetTrigger(ShowParam);
         }
 
         public void Hide()

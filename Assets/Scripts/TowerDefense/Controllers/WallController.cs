@@ -44,12 +44,9 @@ namespace TowerDefense.Controllers
             aliveEntityController.SetHP(CurrentLevelData.hp);
         }
 
-        public bool ShowUpgrade()
+        public void ShowUpgrade()
         {
-            if (!HasUpgrade()) return false;
-
             upgradeShower.ShowCost(GetUpgradeCost());
-            return true;
         }
         
         public bool TryBuyUpgrade(LootManager lootManager)

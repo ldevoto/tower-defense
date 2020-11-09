@@ -7,6 +7,7 @@ namespace TowerDefense.Controllers
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private GameObject[] singletonsToInstantiate = null;
         [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerController playerControllerPrefab = null;
         [SerializeField] private EnemyController[] enemyPrefabs = null;
@@ -23,6 +24,7 @@ namespace TowerDefense.Controllers
 
         private void Awake()
         {
+            InstantiateSingletons();
             lootManager.Restart();
             _relicController = FindObjectOfType<RelicController>();
             _graphController = FindObjectOfType<GraphController>();
@@ -94,6 +96,14 @@ namespace TowerDefense.Controllers
         {
             StopAllCoroutines();
             Debug.Log("Ganaste!");
+        }
+        
+        private void InstantiateSingletons()
+        {
+            foreach (var prefab in singletonsToInstantiate)
+            {
+                Instantiate(prefab);
+            }
         }
     }
 }

@@ -1,16 +1,23 @@
 ﻿using System;
+using TowerDefense.Singletons;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
 {
     public class AliveEntityController : MonoBehaviour
     {
+        public Action<float> OnHit = null;
         public Action OnHpChange = null;
         public Action OnKill = null;
         
         private float _maxHp = 0f;
         private float _currentHp = 0f;
         private bool _isKilled = false;
+
+        private void Awake()
+        {
+            OnHit += ShowDamage;
+        }
 
         public void SetHP(float amount)
         {
@@ -28,6 +35,7 @@ namespace TowerDefense.Controllers
             {
                 Kill();
             }
+            OnHit?.Invoke(amount);
             OnHpChange?.Invoke();
         }
 
@@ -46,6 +54,13 @@ namespace TowerDefense.Controllers
         public float GetHpPercentage()
         {
             return _currentHp / _maxHp;
+        }
+        
+        private void ShowDamage(float damage)
+        {
+            var damageShower = DamageShowerProvider.instance.GetOne();
+            damageShower.transform.position = transform.position;
+            damageShower.Show(damage);
         }
 
         private void Kill()

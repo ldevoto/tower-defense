@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 3870357787682290458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 0.8, z: 1}
   m_Children:
   - {fileID: 3870357787251466272}
   m_Father: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotRigidbody: {fileID: 3870357787682290463}
-  impulse: 10
+  impulse: 15
   targets:
   - Enemy
   shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}
