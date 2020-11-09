@@ -10,7 +10,7 @@
   - [x] Torres
   - [x] Paredes
   - [x] Balas
-- [ ] Mejorar torres
+- [X] Mejorar torres
 - [ ] Diferentes AIs
   - [ ] Enemigos que interrumpen y no
   - [ ] Enemigos que van a buscar al player y como secundario la base

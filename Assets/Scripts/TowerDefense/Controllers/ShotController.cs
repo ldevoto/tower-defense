@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TowerDefense.SO.Behaviour;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace TowerDefense.Controllers
 
         private float _damage = 0f;
         private int _collisions = 0;
+        private List<AliveEntityController> _damagedEntities = new List<AliveEntityController>();
 
         public void ShotWith(float damage)
         {
@@ -35,17 +37,37 @@ namespace TowerDefense.Controllers
             _collisions++;
         }
 
+        public void AddCollision(AliveEntityController aliveEntityController)
+        {
+            _damagedEntities.Add(aliveEntityController);
+        }
+
         public int GetCollisions()
         {
             return _collisions;
         }
 
+        public int GetDamagedEntitiesCount()
+        {
+            return _damagedEntities.Count;
+        }
+
+        public bool AlreadyDamage(AliveEntityController aliveEntityController)
+        {
+            return _damagedEntities.Contains(aliveEntityController);
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (targets.Any(t => other.gameObject.CompareTag(t)))
+            if (IsTarget(other))
             {
                 shotBehaviour.HandleCollision(this,other.gameObject.GetComponent<AliveEntityController>());
             }
+        }
+
+        public bool IsTarget(Collider2D other)
+        {
+            return targets.Any(t => other.gameObject.CompareTag(t));
         }
 
         public void Destroy()

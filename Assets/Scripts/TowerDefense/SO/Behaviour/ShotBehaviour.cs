@@ -10,7 +10,7 @@ namespace TowerDefense.SO.Behaviour
             if (!aliveEntity) return;
             
             aliveEntity.Damage(shooter.GetDamage());
-            shooter.AddCollision();
+            shooter.AddCollision(aliveEntity);
             DoHandleCollision(shooter, aliveEntity);
         }
 

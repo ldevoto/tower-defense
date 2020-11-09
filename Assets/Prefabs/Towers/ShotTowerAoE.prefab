@@ -169,4 +169,4 @@ MonoBehaviour:
   impulse: 15
   targets:
   - Enemy
-  shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}
+  shotBehaviour: {fileID: 11400000, guid: 6e2d388fda9036347a7081a146e35d28, type: 2}

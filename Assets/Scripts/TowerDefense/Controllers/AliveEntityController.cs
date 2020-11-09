@@ -1,6 +1,7 @@
 ﻿using System;
 using TowerDefense.Singletons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace TowerDefense.Controllers
 {
@@ -59,7 +60,7 @@ namespace TowerDefense.Controllers
         private void ShowDamage(float damage)
         {
             var damageShower = DamageShowerProvider.instance.GetOne();
-            damageShower.transform.position = transform.position;
+            damageShower.transform.position = transform.position + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.1f, 0.1f));
             damageShower.Show(damage);
         }
 

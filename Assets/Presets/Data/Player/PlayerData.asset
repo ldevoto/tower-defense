@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   movementSpeed: 2
-  shotCooldown: 0.1
+  shotCooldown: 0.2
   shotData: {fileID: 11400000, guid: 4a8397f8ce841fb4d9d2719acfea3aef, type: 2}

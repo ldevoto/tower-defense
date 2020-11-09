@@ -14,7 +14,7 @@ namespace TowerDefense.Controllers
 
         private void Start()
         {
-            aliveEntityController.SetHP(1000f);
+            aliveEntityController.SetHP(10000f);
             aliveEntityController.OnKill += ForceFieldBroken;
             watcherController.OnAliveEntityEnter += OnAliveEntityEnter;
         }
