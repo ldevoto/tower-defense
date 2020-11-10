@@ -8,93 +8,89 @@ namespace TowerDefense.Controllers
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private WatcherController watcherController = null;
-        [SerializeField] private DamageDealerController damageDealerController = null;
         [SerializeField] private AliveEntityController aliveEntityController = null;
         [SerializeField] private Rigidbody2D enemyRigidbody = null;
         [SerializeField] private float speed = 1f;
         [SerializeField] private float damageCooldown = 0.5f;
         public Action OnKill = null;
         
-        public Transform target;
-        private Transform temporalTarget;
-        IAstarAI ai;
+        private Transform _target;
+        private IAstarAI _ai;
 
-        void OnEnable () {
-            ai = GetComponentInChildren<IAstarAI>();
-            // Update the destination right before searching for a path as well.
-            // This is enough in theory, but this script will also update the destination every
-            // frame as the destination is used for debugging and may be used for other things by other
-            // scripts as well. So it makes sense that it is up to date every frame.
-            if (ai != null) ai.onSearchPath += Update;
-        }
-
-        void OnDisable () {
-            if (ai != null) ai.onSearchPath -= Update;
-        }
-
-        void Update () {
-            if (temporalTarget)
-            {
-                if (target && ai != null) ai.destination = temporalTarget.position;
-            }
-            else
-            {
-                if (target && ai != null) ai.destination = target.position;
-            }
+        private void Awake()
+        {
+            _ai = GetComponentInChildren<IAstarAI>();
         }
         
-        
-
         private void Start()
         {
             aliveEntityController.SetHP(200f);
-            aliveEntityController.OnKill += Kill;
+            Follow(_target);
+        }
+
+        private void OnEnable () {
             watcherController.OnAliveEntityEnter += OnTargetEnter;
             watcherController.OnAliveEntityLeave += OnTargetLeave;
+            aliveEntityController.OnKill += Kill;
         }
-        
+
+        private void OnDisable () {
+            watcherController.OnAliveEntityEnter -= OnTargetEnter;
+            watcherController.OnAliveEntityLeave -= OnTargetLeave;
+            aliveEntityController.OnKill -= Kill;
+        }
+
+        private void Follow(Transform currentTarget)
+        {
+            if (currentTarget)
+            {
+                _ai.destination = currentTarget.position;
+            }
+        }
+
+        public void SetTarget(Transform target)
+        {
+            this._target = target;
+        }
+
         private void OnTargetEnter(AliveEntityController aliveEntity)
         {
-            temporalTarget = aliveEntity.transform;
-            //StartCoroutine(FollowEnemy(aliveEntity));
             StartCoroutine(DamageEntity(aliveEntity));
+            StartCoroutine(FollowTemporalTarget(aliveEntity.transform));
         }
         
         private void OnTargetLeave(AliveEntityController aliveEntity)
         {
-            temporalTarget = null;
             StopAllCoroutines();
+            Follow(_target);
         }
 
         private IEnumerator DamageEntity(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!aliveEntity) break;
+                if (!aliveEntity) yield break;
                 
                 aliveEntity.Damage(10f);
                 yield return new WaitForSeconds(damageCooldown);
             }
         }
 
-        private IEnumerator FollowEnemy(AliveEntityController aliveEntity)
+        private IEnumerator FollowTemporalTarget(Transform temporalTarget)
         {
             while (true)
             {
-                if (!aliveEntity) break;
+                if (!temporalTarget) yield break;
                 
-                var direction = aliveEntity.transform.position - enemyRigidbody.transform.position;
-                direction.z = 0;
-                var rotation = Vector2.SignedAngle(Vector2.right, direction);
-                enemyRigidbody.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
+                Follow(temporalTarget);
                 yield return null;
             }
         }
 
         private void Kill()
         {
-            OnKill?.Invoke();
             Destroy(gameObject);
+            OnKill?.Invoke();
         }
     }
 }

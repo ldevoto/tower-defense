@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonsToInstantiate:
   - {fileID: 403142970464932948, guid: edaafe0293afa5640ba1cea7ef26ea9a, type: 3}
+  - {fileID: 1151363799462549722, guid: 62482e1a9fa400644b91557ca4d65232, type: 3}
   lootManager: {fileID: 11400000, guid: 2fc426680be89394a9e22954c41ef963, type: 2}
   playerControllerPrefab: {fileID: 7786223659837524193, guid: bc4ae784ef7aad84cac180fa929ec1c1, type: 3}
   enemyPrefabs:

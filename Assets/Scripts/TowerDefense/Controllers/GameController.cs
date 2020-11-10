@@ -72,7 +72,7 @@ namespace TowerDefense.Controllers
             _spawnedEnemies++;
             var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
             var enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPoint.position, spawnPoint.rotation);
-            enemyInstance.target = _relicController.transform;
+            enemyInstance.SetTarget(_relicController.transform);
             enemyInstance.OnKill += HandleEnemyKilled;
         }
 

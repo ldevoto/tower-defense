@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 297694855862832903}
   - component: {fileID: 3870357787682290463}
   - component: {fileID: 3870357787682290460}
+  - component: {fileID: 670963960936318158}
   m_Layer: 0
   m_Name: ShotPlayer
   m_TagString: Untagged
@@ -166,7 +167,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotRigidbody: {fileID: 3870357787682290463}
-  impulse: 20
-  targets:
-  - Enemy
-  shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}
+--- !u!114 &670963960936318158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870357787682290458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c3bde95f194ad393fe2e43fe32b1e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ttl: 3

@@ -1,4 +1,6 @@
-﻿using TowerDefense.SO;
+﻿using TowerDefense.Singletons;
+using TowerDefense.Singletons.Shots;
+using TowerDefense.SO;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -27,8 +29,9 @@ namespace TowerDefense.Controllers
         public void ImmediateShot()
         {
             _lastShot = Time.time;
-            var shotInstance = Instantiate(_shotData.shotPrefab, shotOrigin.position, shotOrigin.rotation);
-            shotInstance.ShotWith(_shotData.damage);
+            _shotData.ShotFrom(shotOrigin);
+            //var shotInstance = Instantiate(_shotData.shotPrefab, shotOrigin.position, shotOrigin.rotation);
+            //shotInstance.ShotWith(_shotData, shotOrigin);
         }
 
         public void SetCooldown(float shotCooldown)

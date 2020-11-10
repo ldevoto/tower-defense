@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2999740198115972533}
   - component: {fileID: 2999740198115972535}
   - component: {fileID: 2999740198115972489}
-  - component: {fileID: 2451294326870010345}
   - component: {fileID: 2800189799702619830}
   - component: {fileID: 7241360750861661946}
   m_Layer: 0
@@ -102,18 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveEntityController: {fileID: 2999740198115972535}
   lootPrefab: {fileID: 2231592402276487635, guid: a694f4aef673a374b99cfaab441a8d19, type: 3}
---- !u!114 &2451294326870010345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2999740198115972531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed37b567af3046c6b666055e9066527d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2800189799702619830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   watcherController: {fileID: 4013498987669289471}
-  damageDealerController: {fileID: 2451294326870010345}
   aliveEntityController: {fileID: 2999740198115972535}
   enemyRigidbody: {fileID: 2999740198115972532}
   speed: 2

@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 3870357787682290460, guid: d264b26d5c9bf1f4998b8c0fef6ece0d, type: 3}
   damage: 10
+  impulse: 20
+  shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}
+  targets:
+  - Enemy
+  size: {x: 2.5, y: 0.8, z: 1}
+  shotType: 1

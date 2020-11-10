@@ -2,6 +2,8 @@
 - [x] Agregar base + pergamino
 - [x] Agregar win and lose
 - [x] Contabilizar loot
+- [X] Daño de area para un tipo de bala
+- [ ] Crear pool de balas y destruirlas
 - [X] Permitir colocar torres si alcanza el loot
   - [X] mostrarlo siempre debajo
 - [ ] Agregar presets
@@ -16,4 +18,6 @@
   - [ ] Enemigos que van a buscar al player y como secundario la base
   - [ ] Enemigos que van a buscar solo la base
 - [ ] Agregar animaciones a todo
-- [ ] Daño de area para un tipo de bala
+- [ ] Hacer Menu Principal
+- [ ] Hacer Menu Pausa
+- [ ] Win and Lose
