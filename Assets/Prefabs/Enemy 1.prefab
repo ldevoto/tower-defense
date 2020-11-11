@@ -212,10 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   watcherController: {fileID: 4013498987669289471}
   aliveEntityController: {fileID: 2999740198115972535}
-  enemyRigidbody: {fileID: 2999740198115972532}
-  speed: 2
-  damageCooldown: 0.5
-  target: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: cede2d249f5fe734f88d49b0542130b0, type: 2}
 --- !u!1 &2999740199691951239
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +285,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8d774e4587d24c34581d5ce7ddc2096b, type: 3}
-  m_Color: {r: 0.8679245, g: 0.1760413, b: 0.1760413, a: 1}
+  m_Color: {r: 0.8666667, g: 0.6058073, b: 0.17647058, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

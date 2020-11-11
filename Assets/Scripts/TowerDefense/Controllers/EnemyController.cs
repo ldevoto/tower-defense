@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Pathfinding;
+using TowerDefense.SO;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -9,13 +10,15 @@ namespace TowerDefense.Controllers
     {
         [SerializeField] private WatcherController watcherController = null;
         [SerializeField] private AliveEntityController aliveEntityController = null;
-        [SerializeField] private Rigidbody2D enemyRigidbody = null;
-        [SerializeField] private float speed = 1f;
-        [SerializeField] private float damageCooldown = 0.5f;
+        [SerializeField] private EnemyData enemyData = null;
+        
         public Action OnKill = null;
         
-        private Transform _target;
+        private Transform _defaultTarget;
         private IAstarAI _ai;
+        private Coroutine _damagingCoroutine;
+        private Coroutine _followingCoroutine;
+        private Coroutine _checkingProximityCoroutine;
 
         private void Awake()
         {
@@ -24,8 +27,9 @@ namespace TowerDefense.Controllers
         
         private void Start()
         {
-            aliveEntityController.SetHP(200f);
-            Follow(_target);
+            _ai.maxSpeed = enemyData.speed;
+            aliveEntityController.SetHP(enemyData.hp);
+            Follow(_defaultTarget);
         }
 
         private void OnEnable () {
@@ -40,6 +44,22 @@ namespace TowerDefense.Controllers
             aliveEntityController.OnKill -= Kill;
         }
 
+        private void Update()
+        {
+            Debug.LogFormat("Has reached destination: {0}, {1}", _ai.reachedEndOfPath, _ai.reachedDestination);
+        }
+
+        public void SetTarget(Transform target)
+        {
+            _defaultTarget = target;
+            FollowDefaultTarget();
+        }
+        
+        private void FollowDefaultTarget()
+        {
+            Follow(_defaultTarget);
+        }
+
         private void Follow(Transform currentTarget)
         {
             if (currentTarget)
@@ -48,45 +68,101 @@ namespace TowerDefense.Controllers
             }
         }
 
-        public void SetTarget(Transform target)
-        {
-            this._target = target;
-        }
-
         private void OnTargetEnter(AliveEntityController aliveEntity)
         {
-            StartCoroutine(DamageEntity(aliveEntity));
-            StartCoroutine(FollowTemporalTarget(aliveEntity.transform));
+            enemyData.enemyBehaviour.HandleFarEnter(this, aliveEntity);
         }
         
         private void OnTargetLeave(AliveEntityController aliveEntity)
         {
-            StopAllCoroutines();
-            Follow(_target);
+            enemyData.enemyBehaviour.HandleFarLeave(this, aliveEntity);
         }
 
+        public void StartDamagingEntity(AliveEntityController aliveEntity)
+        {
+            _damagingCoroutine = StartCoroutine(DamageEntity(aliveEntity));
+        }
+        
+        public void StartFollowingTarget(AliveEntityController aliveEntity)
+        {
+            _followingCoroutine = StartCoroutine(FollowTemporalTarget(aliveEntity));
+        }
+
+        public void StartCheckingProximity(AliveEntityController aliveEntity)
+        {
+            _checkingProximityCoroutine = StartCoroutine(CheckProximity(aliveEntity));
+        }
+        
+        public void StopDamagingEntity()
+        {
+            StopCoroutine(_damagingCoroutine);
+        }
+        
+        public void StopFollowingTarget()
+        {
+            StopCoroutine(_followingCoroutine);
+            FollowDefaultTarget();
+        }
+
+        public void StopCheckingProximity()
+        {
+            StopCoroutine(_checkingProximityCoroutine);
+        }
+        
         private IEnumerator DamageEntity(AliveEntityController aliveEntity)
         {
             while (true)
             {
                 if (!aliveEntity) yield break;
                 
-                aliveEntity.Damage(10f);
-                yield return new WaitForSeconds(damageCooldown);
+                aliveEntity.Damage(enemyData.damage);
+                yield return new WaitForSeconds(enemyData.damageCooldown);
             }
         }
 
-        private IEnumerator FollowTemporalTarget(Transform temporalTarget)
+        private IEnumerator FollowTemporalTarget(AliveEntityController aliveEntity)
         {
             while (true)
             {
-                if (!temporalTarget) yield break;
+                if (!aliveEntity) yield break;
                 
-                Follow(temporalTarget);
+                Follow(aliveEntity.transform);
                 yield return null;
             }
         }
 
+        private IEnumerator CheckProximity(AliveEntityController aliveEntity)
+        {
+            var targetIsNear = false;
+            while (true)
+            {
+                if (!aliveEntity) yield break;
+
+                var isNear = IsNear(aliveEntity);
+                if (isNear && !targetIsNear)
+                {
+                    enemyData.enemyBehaviour.HandleNearEnter(this, aliveEntity);
+                    targetIsNear = true;
+                }
+                else if (!isNear && targetIsNear)
+                {
+                    enemyData.enemyBehaviour.HandleNearLeave(this, aliveEntity);
+                    targetIsNear = false;
+                }
+
+                yield return null;
+            }
+        }
+
+        private bool IsNear(AliveEntityController aliveEntity)
+        {
+            if (aliveEntity.gameObject.CompareTag("RelicField"))
+            {
+                return Vector2.Distance(aliveEntity.transform.position, aliveEntityController.transform.position) <= enemyData.damageRelicMinDistance;
+            }
+            return Vector2.Distance(aliveEntity.transform.position, aliveEntityController.transform.position) <= enemyData.damageMinDistance;
+        }
+        
         private void Kill()
         {
             Destroy(gameObject);

@@ -212,10 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   watcherController: {fileID: 4013498987669289471}
   aliveEntityController: {fileID: 2999740198115972535}
-  enemyRigidbody: {fileID: 2999740198115972532}
-  speed: 2
-  damageCooldown: 0.5
-  target: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: cede2d249f5fe734f88d49b0542130b0, type: 2}
 --- !u!1 &2999740199691951239
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 4113267520009623524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 2999740198115972530}
   m_RootOrder: 1
@@ -412,8 +409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - Player
-  - Tower
-  - Wall
   - RelicField
 --- !u!1001 &2999740198985180560
 PrefabInstance:
