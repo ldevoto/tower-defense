@@ -3,21 +3,27 @@
 - [x] Agregar win and lose
 - [x] Contabilizar loot
 - [X] Daño de area para un tipo de bala
-- [ ] Crear pool de balas y destruirlas
+- [X] Crear pool de balas y destruirlas
 - [X] Permitir colocar torres si alcanza el loot
   - [X] mostrarlo siempre debajo
-- [ ] Agregar presets
+- [X] Agregar presets
   - [x] Personaje
-  - [ ] Enemigos
+  - [X] Enemigos
   - [x] Torres
   - [x] Paredes
   - [x] Balas
 - [X] Mejorar torres
 - [ ] Diferentes AIs
-  - [ ] Enemigos que interrumpen y no
+  - [X] Enemigos que interrumpen y no
   - [ ] Enemigos que van a buscar al player y como secundario la base
-  - [ ] Enemigos que van a buscar solo la base
-- [ ] Agregar animaciones a todo
+  - [X] Enemigos que van a buscar solo la base
 - [ ] Hacer Menu Principal
-- [ ] Hacer Menu Pausa
-- [ ] Win and Lose
+- [X] Hacer Menu Pausa
+- [X] Win and Lose
+
+## TODOs Estéticos
+- [ ] Agregar animaciones a todo
+- [ ] Agregar música y sonido
+- [ ] Configurar URP
+- [ ] Agregar Sprites más piolas para todo
+- [ ] Jugar un poco con el Shader

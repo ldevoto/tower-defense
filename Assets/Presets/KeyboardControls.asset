@@ -17,5 +17,7 @@ MonoBehaviour:
   action3: Fire3
   nextButton: NextButton
   previousButton: PreviousButton
+  pauseButton: Cancel
   horizontalAxis: Horizontal
   verticalAxis: Vertical
+  isInUI: 0

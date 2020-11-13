@@ -44,11 +44,6 @@ namespace TowerDefense.Controllers
             aliveEntityController.OnKill -= Kill;
         }
 
-        private void Update()
-        {
-            Debug.LogFormat("Has reached destination: {0}, {1}", _ai.reachedEndOfPath, _ai.reachedDestination);
-        }
-
         public void SetTarget(Transform target)
         {
             _defaultTarget = target;

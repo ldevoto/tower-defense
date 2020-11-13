@@ -23,6 +23,7 @@ namespace TowerDefense.SO
         public override void Update()
         {
             base.Update();
+            if (isInUI) return;
             _rotationValue += Input.GetAxis(rotationAxis) * Time.deltaTime * rotationSpeed;
         }
 

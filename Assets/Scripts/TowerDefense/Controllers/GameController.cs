@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TowerDefense.Controllers.AI;
 using TowerDefense.SO;
+using TowerDefense.UIController;
 using UnityEngine;
 
 namespace TowerDefense.Controllers
@@ -8,8 +9,10 @@ namespace TowerDefense.Controllers
     public class GameController : MonoBehaviour
     {
         [SerializeField] private GameObject[] singletonsToInstantiate = null;
+        [SerializeField] private LevelStateController levelStateController = null;
         [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerController playerControllerPrefab = null;
+        [SerializeField] private Controls playerControls = null;
         [SerializeField] private EnemyController[] enemyPrefabs = null;
         [SerializeField] private Transform[] spawnPoints = null;
         [SerializeField] private int enemiesToSpawn = 10;
@@ -36,6 +39,15 @@ namespace TowerDefense.Controllers
             _relicController.OnForceFieldBroken += _graphController.UpdateCompleteGraph;
             _relicController.OnRelicTouched += PlayerLose;
             StartCoroutine(SpawnEnemies());
+            levelStateController.Init();
+        }
+
+        private void Update()
+        {
+            if (playerControls.GetPauseButton())
+            {
+                levelStateController.Pause();
+            }
         }
 
         private void SpawnDelayedPlayer()
@@ -56,6 +68,7 @@ namespace TowerDefense.Controllers
             _playerController.OnTowerPlaced += _graphController.UpdateCompleteGraph;
             _playerController.OnTowerRemoved += _graphController.UpdateCompleteGraph;
             _playerController.OnKill += SpawnDelayedPlayer;
+            _playerController.SetControls(playerControls);
         }
 
         private IEnumerator SpawnEnemies()
@@ -88,16 +101,15 @@ namespace TowerDefense.Controllers
         private void PlayerLose()
         {
             StopAllCoroutines();
-            Debug.Log("Perdiste");
-            Time.timeScale = 0f;
+            levelStateController.Lose();
         }
 
         private void PlayerWins()
         {
             StopAllCoroutines();
-            Debug.Log("Ganaste!");
+            levelStateController.Win();
         }
-        
+
         private void InstantiateSingletons()
         {
             foreach (var prefab in singletonsToInstantiate)

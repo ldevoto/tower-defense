@@ -12,7 +12,7 @@ namespace TowerDefense.SO
 
         public override float GetRotation(Transform target)
         {
-            return CalculateRotationAngle(target);
+            return isInUI ? 0f : CalculateRotationAngle(target);
         }
 
         private float CalculateRotationAngle(Transform target)

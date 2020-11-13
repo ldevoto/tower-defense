@@ -9,8 +9,11 @@ namespace TowerDefense.SO
         [SerializeField] private string action3 = "Action3";
         [SerializeField] private string nextButton = "NextButton";
         [SerializeField] private string previousButton = "PreviousButton";
+        [SerializeField] private string pauseButton = "PauseButton";
         [SerializeField] private string horizontalAxis = "Horizontal";
         [SerializeField] private string verticalAxis = "Vertical";
+
+        public bool isInUI = false;
         
         private Vector3 _movement = Vector3.zero;
         protected Camera Camera;
@@ -21,41 +24,47 @@ namespace TowerDefense.SO
         
         public Vector3 GetMovement()
         {
-            return _movement;
+            return isInUI ? Vector3.zero : _movement;
         }
 
         public bool GetHoldingAction1()
         {
-            return Input.GetButton(action1);
+            return !isInUI && Input.GetButton(action1);
         }
         
         public bool GetAction1()
         {
-            return Input.GetButtonDown(action1);
+            return !isInUI && Input.GetButtonDown(action1);
         }
 
         public bool GetAction2()
         {
-            return Input.GetButtonDown(action2);
+            return !isInUI && Input.GetButtonDown(action2);
         }
         
         public bool GetAction3()
         {
-            return Input.GetButtonDown(action3);
+            return !isInUI && Input.GetButtonDown(action3);
         }
         
         public bool GetNextButton()
         {
-            return Input.GetButtonDown(nextButton);
+            return !isInUI && Input.GetButtonDown(nextButton);
         }
         
         public bool GetPreviousButton()
         {
-            return Input.GetButtonDown(previousButton);
+            return !isInUI && Input.GetButtonDown(previousButton);
+        }
+
+        public bool GetPauseButton()
+        {
+            return !isInUI && Input.GetButtonDown(pauseButton);
         }
 
         public virtual void Update()
         {
+            if (isInUI) return;
             //Debug.LogFormat("x: {0}, y: {1}, clamp: {2}", Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), GetClampedMovement() * Time.deltaTime);
             _movement += GetClampedMovement() * Time.deltaTime;
         }
