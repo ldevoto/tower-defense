@@ -20,6 +20,7 @@
 - [ ] Hacer Menu Principal
 - [X] Hacer Menu Pausa
 - [X] Win and Lose
+- [ ] Agregar pooling de loot
 
 ## TODOs Estéticos
 - [ ] Agregar animaciones a todo

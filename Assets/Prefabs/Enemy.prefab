@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveEntityController: {fileID: 2999740198115972535}
-  lootPrefab: {fileID: 2231592402276487635, guid: a694f4aef673a374b99cfaab441a8d19, type: 3}
+  loot: {fileID: 11400000, guid: a85a27939bcfc074785d8ce4ef9f901c, type: 2}
 --- !u!114 &2800189799702619830
 MonoBehaviour:
   m_ObjectHideFlags: 0
