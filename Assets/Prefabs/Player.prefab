@@ -719,6 +719,8 @@ GameObject:
   - component: {fileID: 7786223659604977297}
   - component: {fileID: 7786223659604977299}
   - component: {fileID: 7786223659604977292}
+  - component: {fileID: 5201518880086555018}
+  - component: {fileID: 489128992626679509}
   m_Layer: 0
   m_Name: Rigidbody
   m_TagString: Player
@@ -806,6 +808,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotOrigin: {fileID: 7786223658774110020}
+--- !u!114 &5201518880086555018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786223659604977303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6ae073f68c40bda968e4eae0be47b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitch: 1
+  pitchVariation: 0.5
+  volume: 0.2
+  hitSounds:
+  - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+  deadSounds:
+  - {fileID: 8300000, guid: 601e23094a6966f40bde07df856c9f28, type: 3}
+--- !u!114 &489128992626679509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786223659604977303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1335f028d304eb68619612b2677a2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitch: 0.7
+  pitchVariation: 0.1
+  volume: 0.4
+  shotSounds:
+  - {fileID: 8300000, guid: bbef9d0b0ac13476bbaca323ca351d24, type: 3}
+  - {fileID: 8300000, guid: 2025a889b1a4446a5991c081b7dfae5b, type: 3}
+  - {fileID: 8300000, guid: 97cb1199f33074ead900715f9db9c6f3, type: 3}
 --- !u!1 &7786223659837524192
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d492c228a5c14358a6f90b4e49195b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 11400000, guid: 3c701ba0ca9391d45848f3eaa712ed4b, type: 2}
   shooterController: {fileID: 7786223659604977292}
   aliveEntityController: {fileID: 7786223659604977299}
   placeHolderController: {fileID: 5498976865947966991}

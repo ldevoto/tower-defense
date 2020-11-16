@@ -102,7 +102,6 @@ namespace TowerDefense.Controllers
                     shooterController.Shot();
                 }
             }
-
         }
 
         private void SetConstructionMode(bool constructionMode)

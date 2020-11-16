@@ -672,6 +672,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7915006164097504996, guid: 0d26870b96015014693ddd53a7c09228, type: 3}
+      propertyPath: singletonsToInstantiate.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7915006164097504996, guid: 0d26870b96015014693ddd53a7c09228, type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 2999740199457226809, guid: 80753385377bb0b489c8aa4c1cb51895, type: 3}
@@ -707,6 +711,14 @@ PrefabInstance:
       propertyPath: levelStateController
       value: 
       objectReference: {fileID: 1389922403}
+    - target: {fileID: 7915006164097504996, guid: 0d26870b96015014693ddd53a7c09228, type: 3}
+      propertyPath: singletonsToInstantiate.Array.data[3]
+      value: 
+      objectReference: {fileID: 3088882470728461568, guid: 9c6b418b84dc46d4ba4ab6ab67833e5b, type: 3}
+    - target: {fileID: 7915006164097504996, guid: 0d26870b96015014693ddd53a7c09228, type: 3}
+      propertyPath: gameMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 308cae6a91dd50c4e94afdaf6553731e, type: 3}
     - target: {fileID: 7915006164097504997, guid: 0d26870b96015014693ddd53a7c09228, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

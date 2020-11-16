@@ -1,5 +1,4 @@
-﻿using TowerDefense.Singletons;
-using TowerDefense.Singletons.Shots;
+﻿using System;
 using TowerDefense.SO;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ namespace TowerDefense.Controllers
     public class ShooterController : MonoBehaviour
     {
         [SerializeField] private Transform shotOrigin = null;
+
+        public Action OnShot = null;
 
         private ShotData _shotData = null;
         private float _shotCooldown = 0f;
@@ -30,8 +31,7 @@ namespace TowerDefense.Controllers
         {
             _lastShot = Time.time;
             _shotData.ShotFrom(shotOrigin);
-            //var shotInstance = Instantiate(_shotData.shotPrefab, shotOrigin.position, shotOrigin.rotation);
-            //shotInstance.ShotWith(_shotData, shotOrigin);
+            OnShot?.Invoke();
         }
 
         public void SetCooldown(float shotCooldown)

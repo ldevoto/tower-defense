@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using TowerDefense.Controllers.AI;
+using TowerDefense.Controllers.Audio;
 using TowerDefense.SO;
 using TowerDefense.UIController;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private Transform[] spawnPoints = null;
         [SerializeField] private int enemiesToSpawn = 10;
         [SerializeField] private float spawnCooldown = 5;
+        [SerializeField] private AudioClip gameMusic = null;
 
         private PlayerController _playerController = null;
         private RelicController _relicController = null;
@@ -40,6 +42,7 @@ namespace TowerDefense.Controllers
             _relicController.OnRelicTouched += PlayerLose;
             StartCoroutine(SpawnEnemies());
             levelStateController.Init();
+            AudioController.instance.PlayMusic(gameMusic);
         }
 
         private void Update()
