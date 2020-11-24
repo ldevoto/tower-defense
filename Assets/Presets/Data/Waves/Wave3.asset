@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338d2da496d04a4591df1edaa094aef1, type: 3}
   m_Name: Wave3
   m_EditorClassIdentifier: 
-  waveName: Okay, got it. Sorry aboyt that.
+  waveName: Okay, got it. You can slow down now.
   enemiesToSpawn: 30
   enemyPrefabs:
   - {fileID: 2999740199457226809, guid: 80753385377bb0b489c8aa4c1cb51895, type: 3}
