@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Cinemachine;
 using TowerDefense.Controllers.AI;
 using TowerDefense.Controllers.Audio;
 using TowerDefense.SO;
@@ -20,6 +21,7 @@ namespace TowerDefense.Controllers
         [SerializeField] private WaveData[] waves = null;
         [SerializeField] private WaveMessageController waveMessageController = null;
         [SerializeField] private AudioClip gameMusic = null;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera = null;
 
         private PlayerController _playerController = null;
         private RelicController _relicController = null;
@@ -69,6 +71,7 @@ namespace TowerDefense.Controllers
 
         private void SpawnDelayedPlayer()
         {
+            virtualCamera.Follow = null;
             StartCoroutine(SpawnPlayerCoroutine());
         }
 
@@ -84,6 +87,7 @@ namespace TowerDefense.Controllers
             _playerController = Instantiate(playerControllerPrefab, spawnPoint, Quaternion.identity);
             _playerController.OnTowerPlaced += _graphController.UpdateCompleteGraph;
             _playerController.OnTowerRemoved += _graphController.UpdateCompleteGraph;
+            virtualCamera.Follow = _playerController.GetRigidbodyTransform();
             _playerController.OnKill += SpawnDelayedPlayer;
             _playerController.SetControls(playerControls);
         }

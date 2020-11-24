@@ -110,6 +110,11 @@ namespace TowerDefense.Controllers
             placeHolderController.gameObject.SetActive(_constructionMode);
         }
 
+        public Transform GetRigidbodyTransform()
+        {
+            return playerRigidbody.transform;
+        }
+
         private void FixedUpdate()
         {
             playerRigidbody.MovePosition(playerRigidbody.transform.position + _controls.GetMovement() * playerData.movementSpeed);
