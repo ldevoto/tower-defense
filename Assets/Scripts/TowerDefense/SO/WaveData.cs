@@ -24,9 +24,13 @@ namespace TowerDefense.SO
                 gameController.SpawnEnemy(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
                 yield return new WaitForSeconds(Random.Range(minCooldown, minCooldown+deltaCooldown));
             }
-
+            
             gameController.SpawnEnemy(bossPrefab);
-            gameController.FinishCurrentWave();
+        }
+
+        public bool CheckWaveFinished(int enemiesKilled)
+        {
+            return enemiesKilled >= GetEnemiesToSpawn();
         }
 
         public int GetEnemiesToSpawn()

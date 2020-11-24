@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Linq;
 using Cinemachine;
 using TowerDefense.Controllers.AI;
 using TowerDefense.Controllers.Audio;
@@ -27,7 +26,6 @@ namespace TowerDefense.Controllers
         private RelicController _relicController = null;
         private GraphController _graphController = null;
 
-        private int _enemiesToSpawn = 0;
         private int _killedEnemies = 0;
         private int _currentWave = 0;
 
@@ -44,7 +42,6 @@ namespace TowerDefense.Controllers
         {
             _relicController.OnForceFieldBroken += _graphController.UpdateCompleteGraph;
             _relicController.OnRelicTouched += PlayerLose;
-            _enemiesToSpawn = CalculatesEnemiesToSpawn();
             StartWave(0);
             levelStateController.Init();
             AudioController.instance.PlayMusic(gameMusic);
@@ -61,6 +58,7 @@ namespace TowerDefense.Controllers
         private void StartWave(int wave)
         {
             _currentWave = wave;
+            _killedEnemies = 0;
             StartCoroutine(waves[wave].StartWave(this));
         }
 
@@ -103,22 +101,21 @@ namespace TowerDefense.Controllers
         private void HandleEnemyKilled()
         {
             _killedEnemies++;
-            if (_killedEnemies >= _enemiesToSpawn)
+            if (waves[_currentWave].CheckWaveFinished(_killedEnemies))
             {
-                PlayerWins();
+                FinishCurrentWave();
             }
         }
 
-        private int CalculatesEnemiesToSpawn()
-        {
-            return waves.Sum(wave => wave.GetEnemiesToSpawn());
-        }
-
-        public void FinishCurrentWave()
+        private void FinishCurrentWave()
         {
             if (_currentWave + 1 < waves.Length)
             {
                 StartWave(_currentWave+1);
+            }
+            else
+            {
+                PlayerWins();
             }
         }
         

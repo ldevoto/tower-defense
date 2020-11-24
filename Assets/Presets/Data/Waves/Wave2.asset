@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338d2da496d04a4591df1edaa094aef1, type: 3}
   m_Name: Wave2
   m_EditorClassIdentifier: 
-  waveName: Mmm, It's not that hard..
+  waveName: Hmm, It's not that hard..
   enemiesToSpawn: 20
   enemyPrefabs:
   - {fileID: 2999740199457226809, guid: d096b1ba9ab52eb4599a85448cadd7aa, type: 3}
