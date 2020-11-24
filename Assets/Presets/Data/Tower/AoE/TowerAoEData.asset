@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerAoEData
   m_EditorClassIdentifier: 
   animator: {fileID: 1618488556276924732, guid: b9c00ff30613c47489e0fa7e4824a3bc, type: 3}
-  hp: 250
-  cost: 0
-  shotCooldown: 2.5
+  hp: 120
+  cost: 40
+  shotCooldown: 1.6
   shotData: {fileID: 11400000, guid: 4eb6c943f4458da47b08825fe5e1785d, type: 2}

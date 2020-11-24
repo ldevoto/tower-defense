@@ -95,7 +95,10 @@ namespace TowerDefense.Controllers
         
         public void StopFollowingTarget()
         {
-            StopCoroutine(_followingCoroutine);
+            if (_followingCoroutine != null)
+            {
+                StopCoroutine(_followingCoroutine);
+            }
             FollowDefaultTarget();
         }
 

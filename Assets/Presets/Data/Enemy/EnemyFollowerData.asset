@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fd2a56ebf447be86319f952a2da8a0, type: 3}
   m_Name: EnemyFollowerData
   m_EditorClassIdentifier: 
-  hp: 150
-  speed: 1.5
+  hp: 120
+  speed: 1.4
   damage: 10
   damageCooldown: 1
   damageMinDistance: 1

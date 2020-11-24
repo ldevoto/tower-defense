@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 608607545839898406}
   - component: {fileID: 7436175780336577343}
+  - component: {fileID: 7160931613957110244}
   m_Layer: 0
   m_Name: Loot
   m_TagString: Untagged
@@ -48,6 +49,17 @@ MonoBehaviour:
   target: {fileID: 7786223659604977296}
   offset: {x: 0, y: -0.6, z: 0}
   smoothTime: 0
+--- !u!210 &7160931613957110244
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759101129881083892}
+  m_Enabled: 1
+  m_SortingLayerID: 1031554753
+  m_SortingLayer: 6
+  m_SortingOrder: 0
 --- !u!1 &1811633416787118851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1071,11 @@ PrefabInstance:
       objectReference: {fileID: 1120633315769940588}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cf468cd810f8b643a172bbefc48a6f0, type: 3}
+--- !u!4 &5498976865947966984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7535887777331931896, guid: 9cf468cd810f8b643a172bbefc48a6f0, type: 3}
+  m_PrefabInstance: {fileID: 2649401165111407856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5498976865947966991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7535887777331931903, guid: 9cf468cd810f8b643a172bbefc48a6f0, type: 3}
@@ -1070,11 +1087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8618f469fc554f75bb2ed0204cbecda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5498976865947966984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7535887777331931896, guid: 9cf468cd810f8b643a172bbefc48a6f0, type: 3}
-  m_PrefabInstance: {fileID: 2649401165111407856}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9012429361663252493
 PrefabInstance:
   m_ObjectHideFlags: 0

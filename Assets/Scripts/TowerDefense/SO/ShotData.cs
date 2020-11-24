@@ -14,6 +14,7 @@ namespace TowerDefense.SO
         public float impulse = 20f;
         public ShotBehaviour shotBehaviour = null;
         public string[] targets = null;
+        public string[] blockers = null;
         public Vector3 size = Vector3.one;
         public ShotType shotType = ShotType.Player;
 

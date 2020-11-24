@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerSniperData
   m_EditorClassIdentifier: 
   animator: {fileID: 1618488556276924732, guid: a95d89ee85a122c4e9391727b210b219, type: 3}
-  hp: 200
-  cost: 0
-  shotCooldown: 1.5
+  hp: 70
+  cost: 45
+  shotCooldown: 1.2
   shotData: {fileID: 11400000, guid: 1423b49f110005a43aaa836eebd67906, type: 2}

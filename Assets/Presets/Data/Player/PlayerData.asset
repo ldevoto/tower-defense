@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   hp: 100
-  movementSpeed: 2
-  shotCooldown: 0.2
+  movementSpeed: 1.6
+  shotCooldown: 0.3
   shotData: {fileID: 11400000, guid: 4a8397f8ce841fb4d9d2719acfea3aef, type: 2}

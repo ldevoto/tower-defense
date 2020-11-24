@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 1653911530074474720
+  uniqueID: 2258853692335552998
   points: []
   convex: 1
   minBoundsHeight: 0.1
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7854683749949552183}
   - component: {fileID: 8394309479227974787}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NavMesh
   m_TagString: Position
   m_Icon: {fileID: 0}

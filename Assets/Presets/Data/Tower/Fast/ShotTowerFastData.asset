@@ -18,5 +18,7 @@ MonoBehaviour:
   shotBehaviour: {fileID: 11400000, guid: 067515f508b99db44b59f28fbd0771e5, type: 2}
   targets:
   - Enemy
+  blockers:
+  - Wall
   size: {x: 2.5, y: 0.8, z: 1}
   shotType: 1

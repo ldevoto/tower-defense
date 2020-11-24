@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using TowerDefense.Controllers.AI;
 using TowerDefense.Controllers.Audio;
 using TowerDefense.SO;
@@ -14,18 +15,19 @@ namespace TowerDefense.Controllers
         [SerializeField] private LootManager lootManager = null;
         [SerializeField] private PlayerController playerControllerPrefab = null;
         [SerializeField] private Controls playerControls = null;
-        [SerializeField] private EnemyController[] enemyPrefabs = null;
         [SerializeField] private Transform[] spawnPoints = null;
-        [SerializeField] private int enemiesToSpawn = 10;
         [SerializeField] private float spawnCooldown = 5;
+        [SerializeField] private WaveData[] waves = null;
+        [SerializeField] private WaveMessageController waveMessageController = null;
         [SerializeField] private AudioClip gameMusic = null;
 
         private PlayerController _playerController = null;
         private RelicController _relicController = null;
         private GraphController _graphController = null;
 
-        private int _spawnedEnemies = 0;
+        private int _enemiesToSpawn = 0;
         private int _killedEnemies = 0;
+        private int _currentWave = 0;
 
         private void Awake()
         {
@@ -40,7 +42,8 @@ namespace TowerDefense.Controllers
         {
             _relicController.OnForceFieldBroken += _graphController.UpdateCompleteGraph;
             _relicController.OnRelicTouched += PlayerLose;
-            StartCoroutine(SpawnEnemies());
+            _enemiesToSpawn = CalculatesEnemiesToSpawn();
+            StartWave(0);
             levelStateController.Init();
             AudioController.instance.PlayMusic(gameMusic);
         }
@@ -51,6 +54,17 @@ namespace TowerDefense.Controllers
             {
                 levelStateController.Pause();
             }
+        }
+
+        private void StartWave(int wave)
+        {
+            _currentWave = wave;
+            StartCoroutine(waves[wave].StartWave(this));
+        }
+
+        public void WaveStarted()
+        {
+            waveMessageController.ShowMessage(waves[_currentWave].waveName);
         }
 
         private void SpawnDelayedPlayer()
@@ -74,30 +88,33 @@ namespace TowerDefense.Controllers
             _playerController.SetControls(playerControls);
         }
 
-        private IEnumerator SpawnEnemies()
+        public void SpawnEnemy(EnemyController enemyController)
         {
-            while (_spawnedEnemies < enemiesToSpawn)
-            {
-                yield return new WaitForSeconds(Random.Range(2, 5));
-                SpawnEnemy();
-            }
-        }
-
-        private void SpawnEnemy()
-        {
-            _spawnedEnemies++;
             var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            var enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPoint.position, spawnPoint.rotation);
-            enemyInstance.SetTarget(_relicController.transform);
+            var enemyInstance = Instantiate(enemyController, spawnPoint.position, spawnPoint.rotation);
+            enemyInstance.SetTarget(_relicController.GetTargetTransform());
             enemyInstance.OnKill += HandleEnemyKilled;
         }
 
         private void HandleEnemyKilled()
         {
             _killedEnemies++;
-            if (_killedEnemies >= enemiesToSpawn)
+            if (_killedEnemies >= _enemiesToSpawn)
             {
                 PlayerWins();
+            }
+        }
+
+        private int CalculatesEnemiesToSpawn()
+        {
+            return waves.Sum(wave => wave.GetEnemiesToSpawn());
+        }
+
+        public void FinishCurrentWave()
+        {
+            if (_currentWave + 1 < waves.Length)
+            {
+                StartWave(_currentWave+1);
             }
         }
         

@@ -13,7 +13,10 @@ namespace TowerDefense.SO.Behaviour.Enemy
 
         public override void HandleFarEnter(EnemyController enemyController, AliveEntityController aliveEntityController)
         {
-            enemyController.StartFollowingTarget(aliveEntityController);
+            if (!aliveEntityController.gameObject.CompareTag("RelicField"))
+            {
+                enemyController.StartFollowingTarget(aliveEntityController);
+            }
             enemyController.StartCheckingProximity(aliveEntityController);
         }
         

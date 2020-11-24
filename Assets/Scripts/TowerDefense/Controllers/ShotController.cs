@@ -14,6 +14,8 @@ namespace TowerDefense.Controllers
         private int _collisions = 0;
         private float _impulse = 5f;
         private string[] _targets = null;
+        private string[] _blockers = null;
+        private bool _hasImpactOnTarget = false;
         private ShotBehaviour _shotBehaviour = null;
         private readonly List<AliveEntityController> _damagedEntities = new List<AliveEntityController>();
 
@@ -36,9 +38,11 @@ namespace TowerDefense.Controllers
             _damage = shotData.damage;
             _impulse = shotData.impulse;
             _targets = shotData.targets;
+            _blockers = shotData.blockers;
             _shotBehaviour = shotData.shotBehaviour;
             transform.localScale = shotData.size;
             _collisions = 0;
+            _hasImpactOnTarget = false;
             _damagedEntities.Clear();
             shotRigidbody.velocity = Vector2.zero;
             shotRigidbody.angularVelocity = 0;
@@ -81,15 +85,28 @@ namespace TowerDefense.Controllers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsTarget(other))
+            if (_hasImpactOnTarget) return;
+            
+            if (IsBlocker(other))
             {
-                _shotBehaviour.HandleCollision(this,other.gameObject.GetComponent<AliveEntityController>());
+                Destroy();
+                return;
             }
+
+            if (!IsTarget(other)) return;
+            
+            _hasImpactOnTarget = true;
+            _shotBehaviour.HandleCollision(this,other.gameObject.GetComponent<AliveEntityController>());
         }
 
         public bool IsTarget(Collider2D other)
         {
             return _targets.Any(t => other.gameObject.CompareTag(t));
+        }
+        
+        private bool IsBlocker(Collider2D other)
+        {
+            return _blockers.Any(t => other.gameObject.CompareTag(t));
         }
 
         public void Destroy()

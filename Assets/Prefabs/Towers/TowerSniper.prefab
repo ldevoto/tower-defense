@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2741940410496408273}
   - component: {fileID: 868595779219753621}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NavMesh
   m_TagString: Position
   m_Icon: {fileID: 0}
